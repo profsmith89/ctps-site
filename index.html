@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about the published book, FAQs, and contact the author for more information.">
+    <title>Author's Book Site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Book Site</h1>
+        <p>Discover more about <strong>Your Book Title</strong></p>
+    </header>
+
+    <section class="book-info">
+        <h2>About the Book</h2>
+        <img src="book-cover.jpg" alt="Book Cover" class="book-cover">
+        <p><em>Your Book Title</em> is a captivating tale of [brief description]. Dive deep into [topic/subject] and explore [themes].</p>
+    </section>
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>What inspired you to write the book?</h3>
+            <p>I’ve always been passionate about [topic], and this book allowed me to explore that in greater depth.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Where can I purchase the book?</h3>
+            <p>The book is available on [Amazon, local bookstores, etc.]. Links can be found <a href="#">here</a>.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Will there be a sequel?</h3>
+            <p>Yes, I’m currently working on the sequel which will continue the story in new and exciting ways.</p>
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form" action="submit_form.php" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
