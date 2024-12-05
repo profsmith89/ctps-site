@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Displaying a simple alert on form submission. You could replace this with actual form submission functionality.
-        alert('Thank you for your message. I will get back to you soon!');
-        form.reset();
-    });
-});
+// Scripts used on the CTPS site
+// Author: Mike Smith
+
+// JavaScript function that handles the button click
+// associated with chapter ALE dropdown list. The action
+// loads the selected chapter's ALE webpage in a new tab.
+function handleSelectedChapter() {
+    const selectedValue = document.getElementById("ALEdropdown").value;
+    window.open(selectedValue, '_blank', 'noopener,noreferrer')
+}

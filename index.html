@@ -3,58 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn more about the published book, FAQs, and contact the author for more information.">
-    <title>Author's Book Site</title>
+    <meta name="description" content="Resources for Computation Thinking and Problem Solving.">
+    <title>CTPS Book Site</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to the Book Site</h1>
-        <p>Discover more about <strong>Your Book Title</strong></p>
-    </header>
-
-    <section class="book-info">
-        <h2>About the Book</h2>
-        <img src="book-cover.jpg" alt="Book Cover" class="book-cover">
-        <p><em>Your Book Title</em> is a captivating tale of [brief description]. Dive deep into [topic/subject] and explore [themes].</p>
-    </section>
-
-    <section class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <h3>What inspired you to write the book?</h3>
-            <p>I’ve always been passionate about [topic], and this book allowed me to explore that in greater depth.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Where can I purchase the book?</h3>
-            <p>The book is available on [Amazon, local bookstores, etc.]. Links can be found <a href="#">here</a>.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Will there be a sequel?</h3>
-            <p>Yes, I’m currently working on the sequel which will continue the story in new and exciting ways.</p>
-        </div>
-    </section>
-
-    <section class="contact">
-        <h2>Contact Me</h2>
-        <form id="contact-form" action="submit_form.php" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
 
     <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Computational Thinking and Problem Solving</h1>
+        <h4><i>A better way to learn Python programming</i></h4>
+    </header>
+
+    <section class="container21">
+        <div class="book-info">
+            <h2>About the CTPS book</h2>
+            <p>
+This book is not organized like a typical introduction to computer science. It eschews the brutally boring syntax-first approach that has you memorize grammar and punctuation. Instead, it helps you learn to use computation to solve problems that matter to you.
+            </p>
+            <p>
+Each chapter in this book is <span class="highlight">a problem to be solved</span>. As we tackle each, you'll learn <span class="highlight">fundamental concepts of computer science</span> and <span class="highlight">how to express your ideas in the Python programming language</span>. Problem solving is a process, and through a carefully sequenced set of problems, you'll grow from novice to practitioner. This approach works because ideas and skills stick with you when you immediately see how they're useful.
+            </p>
+            <p>
+To dive deeper, I invite you to read the book's <a href="https://profsmith89.github.io/ctps/welcome.html">introduction</a>.
+            </p>
+        </div>
+
+        <div class="frame-image">
+            <img src="images/CosmoBookComputer.webp" alt="A friendly dog sitting next to a book and a computer on a desk. The dog is a yellow Labrador retriever with a calm expression; the book is open with pages visible.">
+        </div>
+    </section>
+
+    <section class="container111">
+        <div class="component">
+            <h2>Getting Started</h2>
+            <p>
+To get the most out of this book, you'll want to try what you read, and this means that you'll need an <span class="highlight">integrated development environment (IDE)</span>. An IDE is makes it easy for you to write and test your own code.
+            </p>
+            <a href="select_ide.html" class="button-link" target="_blank" rel="noopener noreferrer">Let's get you an IDE!</a>
+        </div>
+
+        <div class="component">
+            <h2>ALEs</h2>
+            <p>
+Here's where you can find active learning exercises (ALEs) that will deepen your understanding of each chapter's content.
+            </p>
+            <p>
+Choose a chapter from the dropdown list and then click the "Go!" button to navigate to that chapter's ALEs.
+            </p>
+            <select id="ALEdropdown">
+                <option value="ales/chap01.html">Chapter 1</option>
+                <option value="ales/chap02.html">Chapter 2</option>
+                <option value="ales/chap03.html">Chapter 3</option>
+                <option value="ales/chap04.html">Chapter 4</option>
+                <option value="ales/chap05.html">Chapter 5</option>
+                <option value="ales/chap06.html">Chapter 6</option>
+                <option value="ales/chap07.html">Chapter 7</option>
+                <option value="ales/chap08.html">Chapter 8</option>
+                <option value="ales/chap09.html">Chapter 9</option>
+                <option value="ales/chap10.html">Chapter 10</option>
+                <option value="ales/chap11.html">Chapter 11</option>
+                <option value="ales/chap12.html">Chapter 12</option>
+                <option value="ales/chap13.html">Chapter 13</option>
+                <option value="ales/chap14.html">Chapter 14</option>
+                <option value="ales/chap15.html">Chapter 15</option>
+                <option value="ales/chap16.html">Chapter 16</option>
+                <option value="ales/chap17.html">Chapter 17</option>
+                <option value="ales/chap18.html">Chapter 18</option>
+            </select>
+            
+            <!-- Action button -->
+            <button class="button-link" onclick="handleSelectedChapter()">Go!</button>
+        </div>
+
+        <div class="component">
+            <h2>FAQ</h2>
+            <p>
+<i>Are you an instructor interested in adopting this book and its programming assignments?</i>
+            </p>
+            <p>
+Please contact <a href="https://scholar.harvard.edu/mikesmith">Mike</a>.
+            </p>
+            <a href="faq.html" class="button-link">See more FAQs!</a>
+        </div>
+    </section>
+    
+    <footer>
+        <h4>&copy; 2024 Michael D. Smith. All rights reserved.</h4>
+    </footer>
+
 </body>
+
 </html>
