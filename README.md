@@ -7,15 +7,15 @@ Website for my Computational Thinking and Problem Solving (CTPS) book.
 is an IDE and how to select one. It links to Google Docs that explain
 how to get started with my recommended IDEs.
 
-`faq.html`: A placeholder html page for FAQs. It might be better as
-another publicly accessible Google Doc.
-
 `ales`: A directory with the ALE html files, which I created using
 JupyterBook and copied from my `Books` directory.
 
 `style.css`: Style sheet for site.
 
 `script.js`: Javascripts used on the site.
+
+`utils/grab32.py`: A script that helps students using the cs50.dev
+environment access files in the public CS32 GitHub repos.
 
 `_config.yml`, `CNAME`: ??? Used by github pages?
 
