@@ -18,6 +18,9 @@ If a subdirectory of the same name already exists in the current
 codespace, this script assumes that the user wants a new clean copy
 of the repo's files.  It will name the clean copy `REPO_clean` (e.g.,
 `chap04_clean`).
+
+Author: Mike Smith (with reference help from GPT-4o)
+Date: December 2024
 """
 
 import os
@@ -91,7 +94,7 @@ def main():
     repo = sys.argv[1]
 
     # Start alerting the user to our progress
-    print(f"STARTING grabchapter.py ...")
+    print(f"STARTING grab32.py ...")
 
     # Make sure the script is in a codespaces directory
     codespace_path = determine_working_dir()
@@ -141,7 +144,7 @@ def main():
         print(f"... Renamed {repo}-main to {repo}")
 
     # Alert the user to the fact we're done
-    print(f"grabchapter.py COMPLETE")
+    print(f"grab32.py COMPLETE")
     print()
     print(f"To run a script in {repo}, make sure to put yourself")
     print(f"in that directory by executing: cd {codespace_path}/{repo}")
