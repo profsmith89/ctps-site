@@ -269,4 +269,10 @@ No matter which of these solutions appeal to you just remember that the definiti
 
 Overall, each of the three approaches is a fine solution, and you should use the one that makes the most sense to you.
 
-\[Version 20241204\]
+## ALE 1.6: What is computational thinking?
+
+Jeannette Wing talks about computational thinking as “a fundamental skill for everyone, not just for computer scientists.” Read [the 3-page article](https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf) that contains this quote, and imagine about what you might do with this skill? Then jot down your thoughts in a calendar appointment to yourself that's six months into the future.
+
+While Jeannette's article uses many phrases that might seem foreign to you at this point, don’t worry. Read the article for its main message and enjoy the imagery she invokes.
+
+\[Version 20241213\]
