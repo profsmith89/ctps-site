@@ -327,6 +327,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-4-from-story-to-contract">ALE 1.4: From story to contract</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-5-using-the-while-condition">ALE 1.5: Using the while condition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-6-what-is-computational-thinking">ALE 1.6: What is computational thinking?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-7-paragraph-by-paragraph">ALE 1.7: Paragraph by paragraph</a></li>
 </ul>
             </nav>
         </div>
@@ -536,9 +537,97 @@ document.write(`
 </section>
 <section id="ale-1-6-what-is-computational-thinking">
 <h2>ALE 1.6: What is computational thinking?<a class="headerlink" href="#ale-1-6-what-is-computational-thinking" title="Permalink to this heading">#</a></h2>
-<p>Jeannette Wing talks about computational thinking as “a fundamental skill for everyone, not just for computer scientists.” Read <a class="reference external" href="https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf">the 3-page article</a> that contains this quote, and imagine about what you might do with this skill? Then jot down your thoughts in a calendar appointment to yourself that’s six months into the future.</p>
+<p>Jeannette Wing talks about computational thinking as “a fundamental skill for everyone, not just for computer scientists.” Read <a class="reference external" href="https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf">the 3-page article</a> that contains this quote, and imagine about what you might do with this skill. Then jot down your thoughts in a calendar appointment to yourself that’s six months into the future.</p>
 <p>While Jeannette’s article uses many phrases that might seem foreign to you at this point, don’t worry. Read the article for its main message and enjoy the imagery she invokes.</p>
-<p>[Version 20241213]</p>
+</section>
+<section id="ale-1-7-paragraph-by-paragraph">
+<h2>ALE 1.7: Paragraph by paragraph<a class="headerlink" href="#ale-1-7-paragraph-by-paragraph" title="Permalink to this heading">#</a></h2>
+<p>Though the script at the end of this chapter can read any book, it prints them too fast for human readers. In this exercise, you will modify it to enable a more pleasant reading experience. That is, your script will print one paragraph at a time and ask you for confirmation before printing the next.</p>
+<p>It will look like this when you run the script:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="hll">chap01$ python3 ale07.py
+</span>What book would you like to read? CatInTheHat.txt
+The sun did not shine.
+It was too wet to play.
+So we sat in the house
+All that cold, cold wet day.
+
+Are you ready for another paragraph? 
+</pre></div>
+</div>
+<p>When you press the enter/return key, you will see another paragraph appear, followed by the same question:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>I sat there with Sally.
+We sat there, we two.
+And I said, &quot;How I wish
+We had something to do!&quot;
+
+Are you ready for another paragraph? 
+</pre></div>
+</div>
+<p>When there are no paragraphs left to print, your script should print <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">End.</span></code> and terminate:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Ready for another paragraph?
+
+&quot;Have no fear!&quot; said the cat.
+&quot;I will not let you fall.
+I will hold you up high
+As I stand on a ball.
+With a book on one hand!
+And a cup on my hat!
+But that is not ALL I can do!&quot;
+Said the cat ...
+The End.
+</pre></div>
+</div>
+<p><strong>Step 1.</strong> In your IDE, make a new Python project and paste into the editor pane the script we completed at the end of Chapter 1 (<code class="docutils literal notranslate"><span class="pre">anybook.py</span></code>).</p>
+<p><strong>Step 2.</strong> Let’s first think about what <code class="docutils literal notranslate"><span class="pre">anybook.py</span></code> does in order to decide whether we need to remove anything in it that conflicts with our new goal. Let’s also ask what it doesn’t do so that we know what to add to it in support of our new goal. In this, it’s best to start by analyzing what your starter code does:</p>
+<blockquote>
+<div><p>The script <code class="docutils literal notranslate"><span class="pre">anybook.py</span></code> begins by asking a user to <code class="docutils literal notranslate"><span class="pre">input</span></code> what book they would like to read, and then uses <code class="docutils literal notranslate"><span class="pre">open</span></code> to open the file that contains that story. We still need both these things in order to read the story paragraph by paragraph.</p>
+<p>Next, this script has a <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True</span></code> loop that instructs the computer to execute the statements inside the loop body repeatedly until the <code class="docutils literal notranslate"><span class="pre">break</span></code> instruction is executed. Every time the <code class="docutils literal notranslate"><span class="pre">readline</span></code> statement is executed, a single line of the story is read from <code class="docutils literal notranslate"><span class="pre">my_open_book</span></code>. The subsequent statement uses <code class="docutils literal notranslate"><span class="pre">print</span></code> to immediately print that line of the story. In your new script, you’ll still want every story line to be read and printed, so you should leave the <code class="docutils literal notranslate"><span class="pre">readline</span></code> and <code class="docutils literal notranslate"><span class="pre">print</span></code> statements as they are currently.</p>
+<p>Finally, the statement <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">the_line</span> <span class="pre">==</span> <span class="pre">'':</span></code> checks whether the line read by <code class="docutils literal notranslate"><span class="pre">readline</span></code> and named <code class="docutils literal notranslate"><span class="pre">the_line</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">''</span></code>, which we call the <em>empty string</em> because it contains no characters. If <code class="docutils literal notranslate"><span class="pre">readline</span></code> returns the empty string, then there are no more lines to read and the computer should <code class="docutils literal notranslate"><span class="pre">break</span></code> out of the <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True</span></code> loop. Hopefully it is clear that your new script should still exhibit this behavior.</p>
+</div></blockquote>
+<p>Having gone through all of <code class="docutils literal notranslate"><span class="pre">anybook.py</span></code>, you’ve determined that you need all its statements, and you’re ready to determine what statements you should <em>add</em> so that the computer pauses between printing paragraphs. You can break that task down into the following two questions:</p>
+<ul class="simple">
+<li><p>How can your script detect a paragraph break?</p></li>
+<li><p>How can it pause printing at a paragraph break?</p></li>
+</ul>
+<p>In the next two steps, you’ll answer each of these questions!</p>
+<p><strong>Step 3.</strong> A paragraph break is the blank line between two paragraphs, as shown here:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     All that cold, cold wet day.
+--&gt;     
+     I sat there with Sally.
+</pre></div>
+</div>
+<p>To a human, a paragraph break contains no characters. It might be tempting then to assume that to a computer a paragraph is represented by the empty string. But as we discussed earlier, if <code class="docutils literal notranslate"><span class="pre">readline</span></code> returns the empty string, then that means there are no more lines left in the story.</p>
+<blockquote>
+<div><p>What makes a paragraph break look different to a computer than the end of a story?</p>
+</div></blockquote>
+<p>Make sure you’ve paused and thought about the question above before reading on.</p>
+<p>As we learned in Chapter 1, every file line ends with a newline character (<code class="docutils literal notranslate"><span class="pre">\n</span></code>) that doesn’t get visibly printed, but is there to tell the computer when printing to start a new line. A paragraph break then is string containing a newline character and nothing else. In code, a paragraph break occurs when <code class="docutils literal notranslate"><span class="pre">the_line</span> <span class="pre">==</span> <span class="pre">'\n'</span></code>.</p>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True</span></code> loop of your script, add the following if-statement after the existing print-statement. Make sure that the first two lines have the same amount of indentation as the line before them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for paragraph break</span>
+<span class="k">if</span> <span class="n">the_line</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+    <span class="c1"># pause printing and ask if ready for another paragraph</span>
+</pre></div>
+</div>
+<p><strong>Step 4.</strong> With our first question completed, we now need to replace the pseudocode inside the if-statement with Python statement(s) that pause the printing and ask the user, <code class="docutils literal notranslate"><span class="pre">Are</span> <span class="pre">you</span> <span class="pre">ready</span> <span class="pre">for</span> <span class="pre">another</span> <span class="pre">paragraph?</span></code>.</p>
+<p>You’ve seen a Python command that can do both of those things. What Python statement asks the user for their input?</p>
+<p>The answer, of course, is the <code class="docutils literal notranslate"><span class="pre">input</span></code> command, which <code class="docutils literal notranslate"><span class="pre">anybook.py</span></code> uses to grab a book’s filename:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_book</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;What book would you like to read? &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input-statement you’ll write differs from this one in two ways:</p>
+<ul class="simple">
+<li><p>It will ask the user a different question.</p></li>
+<li><p>The user’s answer to this question doesn’t matter since we only care that the user indicated that they’re ready to move on.</p></li>
+</ul>
+<p>With these differences in mind, replace the pseudocode inside the new if-statement with an input-statement that solves this exercise.</p>
+<p><strong>Step 5</strong>. Test your code! Run your script on <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code> and compare its output to the example at the start of this exercise.</p>
+<blockquote>
+<div><p>If you encounter a <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> after typing in <code class="docutils literal notranslate"><span class="pre">CatInTheHat.txt</span></code>, then you forgot to follow some instructions from Chapter 1. Please go back to the section titled <a class="reference external" href="https://profsmith89.github.io/ctps/chap01.html#our-first-error">Our first error</a> and make the fix described there.</p>
+</div></blockquote>
+<p>Does your script should print the first paragraph of the story, and then ask you “Are you ready for another paragraph?”.</p>
+<p>If it does, press the enter/return key. Is the next and only the next paragraph printed?</p>
+<p>Keep pressing the enter/return key to make sure that all paragraphs get printed one at a time and that the script prints <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">End.</span></code> (and exits) when there are no more paragraphs to print.</p>
+<p>[Version 20250109]</p>
 </section>
 </section>
 
@@ -615,6 +704,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-4-from-story-to-contract">ALE 1.4: From story to contract</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-5-using-the-while-condition">ALE 1.5: Using the while condition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-6-what-is-computational-thinking">ALE 1.6: What is computational thinking?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-1-7-paragraph-by-paragraph">ALE 1.7: Paragraph by paragraph</a></li>
 </ul>
   </nav></div>
 

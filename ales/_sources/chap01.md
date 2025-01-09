@@ -271,8 +271,123 @@ Overall, each of the three approaches is a fine solution, and you should use the
 
 ## ALE 1.6: What is computational thinking?
 
-Jeannette Wing talks about computational thinking as “a fundamental skill for everyone, not just for computer scientists.” Read [the 3-page article](https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf) that contains this quote, and imagine about what you might do with this skill? Then jot down your thoughts in a calendar appointment to yourself that's six months into the future.
+Jeannette Wing talks about computational thinking as “a fundamental skill for everyone, not just for computer scientists.” Read [the 3-page article](https://www.cs.cmu.edu/~15110-s13/Wing06-ct.pdf) that contains this quote, and imagine about what you might do with this skill. Then jot down your thoughts in a calendar appointment to yourself that's six months into the future.
 
 While Jeannette's article uses many phrases that might seem foreign to you at this point, don’t worry. Read the article for its main message and enjoy the imagery she invokes.
 
-\[Version 20241213\]
+## ALE 1.7: Paragraph by paragraph
+
+Though the script at the end of this chapter can read any book, it prints them too fast for human readers. In this exercise, you will modify it to enable a more pleasant reading experience. That is, your script will print one paragraph at a time and ask you for confirmation before printing the next.
+
+It will look like this when you run the script:
+
+```{code-block} none
+---
+emphasize-lines: 1
+---
+chap01$ python3 ale07.py
+What book would you like to read? CatInTheHat.txt
+The sun did not shine.
+It was too wet to play.
+So we sat in the house
+All that cold, cold wet day.
+
+Are you ready for another paragraph? 
+```
+
+When you press the enter/return key, you will see another paragraph appear, followed by the same question: 
+
+```{code-block} none
+I sat there with Sally.
+We sat there, we two.
+And I said, "How I wish
+We had something to do!"
+
+Are you ready for another paragraph? 
+```
+
+When there are no paragraphs left to print, your script should print `The End.` and terminate:
+
+```{code-block} none
+Ready for another paragraph?
+
+"Have no fear!" said the cat.
+"I will not let you fall.
+I will hold you up high
+As I stand on a ball.
+With a book on one hand!
+And a cup on my hat!
+But that is not ALL I can do!"
+Said the cat ...
+The End.
+```
+
+**Step 1.** In your IDE, make a new Python project and paste into the editor pane the script we completed at the end of Chapter 1 (`anybook.py`).
+
+**Step 2.** Let's first think about what `anybook.py` does in order to decide whether we need to remove anything in it that conflicts with our new goal. Let's also ask what it doesn't do so that we know what to add to it in support of our new goal. In this, it's best to start by analyzing what your starter code does:
+
+> The script `anybook.py` begins by asking a user to `input` what book they would like to read, and then uses `open` to open the file that contains that story. We still need both these things in order to read the story paragraph by paragraph. 
+> 
+> Next, this script has a `while True` loop that instructs the computer to execute the statements inside the loop body repeatedly until the `break` instruction is executed. Every time the `readline` statement is executed, a single line of the story is read from `my_open_book`. The subsequent statement uses `print` to immediately print that line of the story. In your new script, you'll still want every story line to be read and printed, so you should leave the `readline` and `print` statements as they are currently.
+> 
+> Finally, the statement `if the_line == '':` checks whether the line read by `readline` and named `the_line` is equal to `''`, which we call the _empty string_ because it contains no characters. If `readline` returns the empty string, then there are no more lines to read and the computer should `break` out of the `while True` loop. Hopefully it is clear that your new script should still exhibit this behavior. 
+
+Having gone through all of `anybook.py`, you've determined that you need all its statements, and you're ready to determine what statements you should _add_ so that the computer pauses between printing paragraphs. You can break that task down into the following two questions:
+
+- How can your script detect a paragraph break?
+- How can it pause printing at a paragraph break?
+
+In the next two steps, you'll answer each of these questions!
+
+**Step 3.** A paragraph break is the blank line between two paragraphs, as shown here:
+
+```{code-block} none
+     All that cold, cold wet day.
+-->     
+     I sat there with Sally.
+```
+
+To a human, a paragraph break contains no characters. It might be tempting then to assume that to a computer a paragraph is represented by the empty string. But as we discussed earlier, if `readline` returns the empty string, then that means there are no more lines left in the story. 
+
+> What makes a paragraph break look different to a computer than the end of a story?
+
+Make sure you've paused and thought about the question above before reading on.
+
+As we learned in Chapter 1, every file line ends with a newline character (`\n`) that doesn't get visibly printed, but is there to tell the computer when printing to start a new line. A paragraph break then is string containing a newline character and nothing else. In code, a paragraph break occurs when `the_line == '\n'`. 
+
+Inside the `while True` loop of your script, add the following if-statement after the existing print-statement. Make sure that the first two lines have the same amount of indentation as the line before them.
+
+```{code-block} python
+# Check for paragraph break
+if the_line == '\n':
+    # pause printing and ask if ready for another paragraph
+```
+
+**Step 4.** With our first question completed, we now need to replace the pseudocode inside the if-statement with Python statement(s) that pause the printing and ask the user, `Are you ready for another paragraph?`.
+
+You've seen a Python command that can do both of those things. What Python statement asks the user for their input? 
+
+The answer, of course, is the `input` command, which `anybook.py` uses to grab a book's filename:
+
+```{code-block} python
+my_book = input('What book would you like to read? ')
+```
+
+The input-statement you'll write differs from this one in two ways:
+
+*   It will ask the user a different question.
+*   The user's answer to this question doesn't matter since we only care that the user indicated that they're ready to move on.
+
+With these differences in mind, replace the pseudocode inside the new if-statement with an input-statement that solves this exercise. 
+
+**Step 5**. Test your code! Run your script on `CatInTheHat.txt` and compare its output to the example at the start of this exercise. 
+
+> If you encounter a `FileNotFoundError` after typing in `CatInTheHat.txt`, then you forgot to follow some instructions from Chapter 1. Please go back to the section titled [Our first error](https://profsmith89.github.io/ctps/chap01.html#our-first-error) and make the fix described there.
+
+Does your script should print the first paragraph of the story, and then ask you "Are you ready for another paragraph?".
+
+If it does, press the enter/return key. Is the next and only the next paragraph printed?
+
+Keep pressing the enter/return key to make sure that all paragraphs get printed one at a time and that the script prints `The End.` (and exits) when there are no more paragraphs to print.
+
+\[Version 20250109\]
