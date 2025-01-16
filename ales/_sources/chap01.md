@@ -309,7 +309,7 @@ Are you ready for another paragraph?
 When there are no paragraphs left to print, your script should print `The End.` and terminate:
 
 ```{code-block} none
-Ready for another paragraph?
+Are you ready for another paragraph?
 
 "Have no fear!" said the cat.
 "I will not let you fall.
@@ -347,13 +347,13 @@ In the next two steps, you'll answer each of these questions!
      I sat there with Sally.
 ```
 
-To a human, a paragraph break contains no characters. It might be tempting then to assume that to a computer a paragraph is represented by the empty string. But as we discussed earlier, if `readline` returns the empty string, then that means there are no more lines left in the story. 
+To a human, a paragraph break contains no characters. It might be tempting then to assume that to a computer a paragraph break is represented by the empty string. But as we discussed earlier, if `readline` returns the empty string, then that means there are no more lines left in the story. 
 
 > What makes a paragraph break look different to a computer than the end of a story?
 
 Make sure you've paused and thought about the question above before reading on.
 
-As we learned in Chapter 1, every file line ends with a newline character (`\n`) that doesn't get visibly printed, but is there to tell the computer when printing to start a new line. A paragraph break then is string containing a newline character and nothing else. In code, a paragraph break occurs when `the_line == '\n'`. 
+As we learned in Chapter 1, every file line ends with a newline character (`\n`) that doesn't get visibly printed, but is there to tell the computer when printing to start a new line. A paragraph break then is a string containing a newline character and nothing else. In code, a paragraph break occurs when `the_line == '\n'`. 
 
 Inside the `while True` loop of your script, add the following if-statement after the existing print-statement. Make sure that the first two lines have the same amount of indentation as the line before them.
 
@@ -384,10 +384,10 @@ With these differences in mind, replace the pseudocode inside the new if-stateme
 
 > If you encounter a `FileNotFoundError` after typing in `CatInTheHat.txt`, then you forgot to follow some instructions from Chapter 1. Please go back to the section titled [Our first error](https://profsmith89.github.io/ctps/chap01.html#our-first-error) and make the fix described there.
 
-Does your script should print the first paragraph of the story, and then ask you "Are you ready for another paragraph?".
+Does your script print the first paragraph of the story, and then ask you "Are you ready for another paragraph?".
 
 If it does, press the enter/return key. Is the next and only the next paragraph printed?
 
 Keep pressing the enter/return key to make sure that all paragraphs get printed one at a time and that the script prints `The End.` (and exits) when there are no more paragraphs to print.
 
-\[Version 20250109\]
+\[Version 20250113\]
