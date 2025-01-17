@@ -19,12 +19,29 @@ codespace, this script assumes that the user wants a new clean copy
 of the repo's files.  It will name the clean copy `REPO_clean` (e.g.,
 `chap04_clean`).
 
+It also grabs the CS32 `.devcontainer.json` file and replaces the CS50
+version with our CS32 version. We depend upon the student to force a
+full rebuild the the codespaces container. This is done by:
+
+  * pressing "Command + Shift + P” (if on macOS) or “Ctrl + Shift + P”
+    (if on Windows);
+  * search for “Codespaces: Rebuild Container”;
+  * press Enter on the keyboard.
+
+Make sure that the students select the Full Rebuild (not Rebuild) option
+to perform a codespace rebuild.
+
+This script does this setup work if you run it with this special parameter:
+
+$ python3 grab32.py cs32-setup
+
 Author: Mike Smith (with reference help from GPT-4o)
-Date: December 2024
+Date: January 2025
 """
 
 import os
 import re
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -33,6 +50,8 @@ import zipfile
 ORG_URL = 'https://github.com/seas-cs32/'
 MAIN_ZIP_PATH = '/archive/refs/heads/main.zip'
 CODESPACES_ROOT = '/workspaces'
+SETUP_REPO = 'template'
+
 
 def determine_working_dir():
     """Finds and returns the root directory of the user's codespace"""
@@ -67,7 +86,7 @@ def determine_working_dir():
             sys.exit(f"ERROR changing directory: {e}")
 
         return codespace_path
-    
+
     # We need the user's help to find the right place to put the repo
     print('ERROR: Failed to find the root directory of your codespace.')
     print('ERROR: Please cd there and rerun this script.')
@@ -92,6 +111,20 @@ def main():
         sys.exit("Usage: python3 grab32.py REPO")
 
     repo = sys.argv[1]
+
+    # Check validity of input parameter
+    if repo == 'cs32-setup':
+        # Special case
+        SETUP = True
+        repo = SETUP_REPO
+    else:
+        SETUP = False
+
+        # Check for and gracefully handle bad parameters
+        if re.fullmatch(r'chap[01][1-8]', repo) or repo == 'chap09' or repo == 'chap10':
+            pass
+        else:
+            sys.exit(f"ERROR: {repo} is not a valid; did you mistype it?")
 
     # Start alerting the user to our progress
     print(f"STARTING grab32.py ...")
@@ -143,12 +176,35 @@ def main():
         my_rename(repo + '-main', repo)
         print(f"... Renamed {repo}-main to {repo}")
 
+    # Clean up if running cs32-setup
+    if SETUP:
+        # Replace CS50 .devcontainer.json with our CS32 one
+        src = f'{repo}/.devcontainer.json'
+        dst = '.devcontainer.json'
+        try:
+            shutil.move(src, dst)
+            print(f"... Moved {src} to {dst}")
+        except FileNotFoundError:
+            sys.exit(f"ERROR moving {src}, file not found")
+        except Exception as e:
+            sys.exit(f"ERROR occurred while moving {src}: {e}")
+
+        # Remove the SETUP_REPO directory
+        try:
+            shutil.rmtree(repo)
+            print(f"... Removed {repo}")
+        except FileNotFoundError:
+            sys.exit(f"ERROR removing {repo}, directory not found")
+        except Exception as e:
+            sys.exit(f"ERROR occurred while removing {repo}: {e}")
+
     # Alert the user to the fact we're done
     print(f"grab32.py COMPLETE")
     print()
-    print(f"To run a script in {repo}, make sure to put yourself")
-    print(f"in that directory by executing: cd {codespace_path}/{repo}")
-    print()
+    if not SETUP:
+        print(f"To run a script in {repo}, make sure to put yourself")
+        print(f"in that directory by executing: cd {codespace_path}/{repo}")
+        print()
 
 if __name__ == '__main__':
     main()
