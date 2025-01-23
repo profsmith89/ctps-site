@@ -331,7 +331,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-street-address">ALE 3.11: Coarsening street address</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-a-street-address">ALE 3.11: Coarsening a street address</a></li>
 </ul>
             </nav>
         </div>
@@ -718,8 +718,8 @@ document.write(`
 <p>Try changing line 14 in <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> and then run it. This script’s <code class="docutils literal notranslate"><span class="pre">main</span></code> function calls <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with both strings and lists, and it will fail to complete successfully.</p>
 <p>The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.</p>
 </section>
-<section id="ale-3-11-coarsening-street-address">
-<h2>ALE 3.11: Coarsening street address<a class="headerlink" href="#ale-3-11-coarsening-street-address" title="Permalink to this heading">#</a></h2>
+<section id="ale-3-11-coarsening-a-street-address">
+<h2>ALE 3.11: Coarsening a street address<a class="headerlink" href="#ale-3-11-coarsening-a-street-address" title="Permalink to this heading">#</a></h2>
 <p>States and the U.S. federal governments regularly collect sensitive information about citizens and foreign nationals. Many of the agencies that hold these data are required by law to make publicly available what they’ve collected. They are also required to protect the privacy of the individuals in the data. Unfortunately, making data useful and privacy-preserving is a hard problem.</p>
 <p>Let’s take a look at one such public data set: <a class="reference external" href="https://data.cambridgema.gov/Public-Safety/Tow-Log/aa6j-h24p/about_data">the City of Cambridge Tow Log</a>, which contains information about the vehicles towed within the city limits of Cambridge, MA. Feel free to click the “Export” button, download the data set as a CSV file, and open it, which you can do with practically any spreadsheet program (or later, as we’ll learn, using a Python CSV-compatible library).</p>
 <p>The data set contains information about the vehicle towed (e.g., its make, model, color, year, and state of registry). It also contains information about the general location of where the towing took place. I say “general location” because the log “coarsens” this information so that you can’t tell exactly where a car with these characteristics was found and, presumably, make it harder to figure out whose car was towed.</p>
@@ -816,7 +816,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-street-address">ALE 3.11: Coarsening street address</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-a-street-address">ALE 3.11: Coarsening a street address</a></li>
 </ul>
   </nav></div>
 

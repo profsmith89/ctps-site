@@ -538,7 +538,7 @@ Try changing line 14 in `bookshelf1.py` and then run it. This script's `main` fu
 
 The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.
 
-## ALE 3.11: Coarsening street address
+## ALE 3.11: Coarsening a street address
 
 States and the U.S. federal governments regularly collect sensitive information about citizens and foreign nationals. Many of the agencies that hold these data are required by law to make publicly available what they've collected. They are also required to protect the privacy of the individuals in the data. Unfortunately, making data useful and privacy-preserving is a hard problem.
 
