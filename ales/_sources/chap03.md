@@ -538,4 +538,26 @@ Try changing line 14 in `bookshelf1.py` and then run it. This script's `main` fu
 
 The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.
 
-\[Version 20241204\]
+## ALE 3.11: Coarsening street address
+
+States and the U.S. federal governments regularly collect sensitive information about citizens and foreign nationals. Many of the agencies that hold these data are required by law to make publicly available what they've collected. They are also required to protect the privacy of the individuals in the data. Unfortunately, making data useful and privacy-preserving is a hard problem.
+
+Let's take a look at one such public data set: [the City of Cambridge Tow Log](https://data.cambridgema.gov/Public-Safety/Tow-Log/aa6j-h24p/about_data), which contains information about the vehicles towed within the city limits of Cambridge, MA. Feel free to click the "Export" button, download the data set as a CSV file, and open it, which you can do with practically any spreadsheet program (or later, as we'll learn, using a Python CSV-compatible library).
+
+The data set contains information about the vehicle towed (e.g., its make, model, color, year, and state of registry). It also contains information about the general location of where the towing took place. I say "general location" because the log "coarsens" this information so that you can't tell exactly where a car with these characteristics was found and, presumably, make it harder to figure out whose car was towed.
+
+> For example, instead of recording that a car was towed from in front of 119 Reed Street in Cambridge, the log reports the location as "1XX Reed St". And instead of listing 6 Emmons Place, it contains "0XX Emmons Pl".
+
+**Your task** is to write the body of a function called `coarsen` (in the `chap03/ale11.py` starter code) that takes a complete street address and returns a coarsened street address like the ones that you see in the Tow Log.
+
+And because tow-truck drivers are more interested in towing vehicles than recording information they figure no one will ever read, your function should also deal with **random amounts of whitespace (i.e., spaces and tabs)** at the start and end of your function's input parameter.
+
+Some things to know that may help:
+
+*   The main routine in the starter code in `chap03/ale11.py` will test your function and tell you whether it passes tests of increasing difficulty. You don't have to touch the `main` routine.
+*   Some of the work you need to do is easily accomplished by the Python function `str.strip` in its default mode (i.e., with no input parameter), which you should read about using online resources.
+*   You might also consider using `str.lstrip` with a set of characters that would remove the part of the address you have to coarsen. With some simple arithmetic and slicing, you can grab the house number that you have to coarsen, coarsen it, and finally re-attach it to the street name.
+
+When you're done, you'll have accomplished a non-trivial string manipulation task. Congratulations!
+
+\[Version 20250122\]
