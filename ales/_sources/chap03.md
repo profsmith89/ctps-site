@@ -546,7 +546,7 @@ Let's take a look at one such public data set: [the City of Cambridge Tow Log](h
 
 The data set contains information about the vehicle towed (e.g., its make, model, color, year, and state of registry). It also contains information about the general location of where the towing took place. I say "general location" because the log "coarsens" this information so that you can't tell exactly where a car with these characteristics was found and, presumably, make it harder to figure out whose car was towed.
 
-> For example, instead of recording that a car was towed from in front of 119 Reed Street in Cambridge, the log reports the location as "1XX Reed St". And instead of listing 6 Emmons Place, it contains "0XX Emmons Pl".
+> For example, instead of recording that a car was towed from in front of 119 Reed St in Cambridge, the log reports the location as "1XX Reed St". And instead of listing 6 Emmons Pl, it contains "0XX Emmons Pl".
 
 **Your task** is to write the body of a function called `coarsen` (in the `chap03/ale11.py` starter code) that takes a complete street address and returns a coarsened street address like the ones that you see in the Tow Log.
 
