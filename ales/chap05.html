@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Chapter 5 &#8212; Computational Thinking and Problem Solving</title>
   
@@ -15,52 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chap05';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Chapter 4" href="chap04.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -75,23 +75,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+  <div id="pst-scroll-pixel-helper"></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +92,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,16 +99,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -129,9 +130,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="ctps-ales.html">
+  
   
   
   
@@ -141,12 +146,19 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/mike_flat.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/mike_flat.png" class="logo__image only-light" alt="Computational Thinking and Problem Solving - Home"/>
+    <img src="_static/mike_flat.png" class="logo__image only-dark pst-js-only" alt="Computational Thinking and Problem Solving - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -183,14 +195,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -199,14 +216,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -281,26 +298,20 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -335,19 +346,19 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-5">
-<h1>Chapter 5<a class="headerlink" href="#chapter-5" title="Permalink to this heading">#</a></h1>
+<h1>Chapter 5<a class="headerlink" href="#chapter-5" title="Link to this heading">#</a></h1>
 <section id="ale-5-1-too-many-guesses">
-<h2>ALE 5.1: Too many guesses<a class="headerlink" href="#ale-5-1-too-many-guesses" title="Permalink to this heading">#</a></h2>
+<h2>ALE 5.1: Too many guesses<a class="headerlink" href="#ale-5-1-too-many-guesses" title="Link to this heading">#</a></h2>
 <p>In this chapter, we learned how to build a guess-the-number game that ran until the player correctly guessed the secret number, but some games limit the number of guesses a player has. For example, the online game <a class="reference external" href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> permits you to make only six guesses, and if you haven’t guessed the secret word within those six guesses, the game ends. Wordle’s designer was inspired in part by the game Mastermind, and I own a Mini Mastermind game that also allows no more than six guesses of the hidden pattern of colored pegs.</p>
 <p><strong>Step 1.</strong> Your task in this exercise is to change <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> into a game that gives the player a maximum of six guesses. If player doesn’t guess the secret number within six turns, the game should print an appropriate message and terminate.</p>
 <p>Start your work from our existing <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code> script, practicing Steps 5-8 of our problem-solving process.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/guess32.py</span>
-<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 4</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
 <span class="linenos"> 5</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to GUESS THE NUMBER! ##&#39;</span><span class="p">)</span>
 <span class="linenos"> 6</span>
 <span class="linenos"> 7</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -385,25 +396,25 @@ document.write(`
 </ol>
 </section>
 <section id="ale-5-2-so-many-ways-to-pick">
-<h2>ALE 5.2: So many ways to pick<a class="headerlink" href="#ale-5-2-so-many-ways-to-pick" title="Permalink to this heading">#</a></h2>
+<h2>ALE 5.2: So many ways to pick<a class="headerlink" href="#ale-5-2-so-many-ways-to-pick" title="Link to this heading">#</a></h2>
 <p>Our guess-the-number game used the <code class="docutils literal notranslate"><span class="pre">randint</span></code> function in <a class="reference external" href="https://docs.python.org/3/library/random.html">Python’s <code class="docutils literal notranslate"><span class="pre">random</span></code> library</a>. This function is quite convenient if we want to pick a random integer in a closed range.</p>
 <p><strong>Step 1.</strong> Using <code class="docutils literal notranslate"><span class="pre">randint</span></code>, what statement (or small number of statements) could you write to randomly choose an even integer between 2 and 100? Put your code in the next code block, and run your solution several times to make sure you did it correctly.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Randomly choose an even integer in the range [2, 100]</span>
-<span class="linenos">2</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos">2</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos">3</span>
 <span class="linenos">4</span><span class="c1"># YOUR SOLUTION HERE</span>
 </pre></div>
 </div>
 <p><strong>Step 2.</strong> The <code class="docutils literal notranslate"><span class="pre">random</span></code> library also provides a <code class="docutils literal notranslate"><span class="pre">randrange</span></code> function that allows you to specify a <code class="docutils literal notranslate"><span class="pre">step</span></code> value that is the difference between each integer in the range. Use <code class="docutils literal notranslate"><span class="pre">randrange</span></code> instead of <code class="docutils literal notranslate"><span class="pre">randint</span></code> to again randomly choose an even integer between 2 and 100.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Randomly choose an even integer in the range [2, 100]</span>
-<span class="linenos">2</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos">2</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos">3</span>
 <span class="linenos">4</span><span class="c1"># YOUR SOLUTION HERE</span>
 </pre></div>
 </div>
 <p><strong>Step 3.</strong> Moving away from integers, the <code class="docutils literal notranslate"><span class="pre">random</span></code> library also includes a function called <code class="docutils literal notranslate"><span class="pre">choice</span></code> that makes a random selection from a given sequence. Build yourself a sequence object containing 5 jokes from <a class="reference external" href="http://icanhazdadjoke.com">icanhazdadjoke.com</a>, and then use the choice function to randomly choose one of them. Run your code multiple times.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Randomly choose one of five bad dad jokes</span>
-<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="c1"># YOUR SOLUTION HERE</span>
 <span class="linenos"> 5</span><span class="n">jokes</span> <span class="o">=</span> <span class="p">[</span>
@@ -417,7 +428,7 @@ document.write(`
 </div>
 <p><strong>Step 4.</strong> Finally, copy your solution to Step 3 into the code block below. Now read about the function <code class="docutils literal notranslate"><span class="pre">random.seed</span></code> in the <code class="docutils literal notranslate"><span class="pre">random</span></code> library, and figure out how to use it to print out <em>the same bad dad joke every time</em> the code block is run. Gain certainty about your solution by wrapping it in a loop that iterates 25 times and prints the random choice each time. Your dad would be so proud.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Randomly choose the SAME bad dad joke with each choice</span>
-<span class="linenos">2</span><span class="kn">import</span> <span class="nn">random</span>
+<span class="linenos">2</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="linenos">3</span>
 <span class="linenos">4</span><span class="c1"># YOUR SOLUTION HERE</span>
 </pre></div>
@@ -428,7 +439,7 @@ document.write(`
 </div>
 </section>
 <section id="ale-5-3-catching-exceptions">
-<h2>ALE 5.3: Catching exceptions<a class="headerlink" href="#ale-5-3-catching-exceptions" title="Permalink to this heading">#</a></h2>
+<h2>ALE 5.3: Catching exceptions<a class="headerlink" href="#ale-5-3-catching-exceptions" title="Link to this heading">#</a></h2>
 <p>Our guess-the-number game used a try-except-statement to give the user another opportunity to input a guess if what they typed wasn’t “a string in an integer suit,” as defined by Python’s <code class="docutils literal notranslate"><span class="pre">int</span></code> type conversion function.</p>
 <p><strong>Step 1.</strong> The following code block repeats that <em>design pattern</em> we used in <code class="docutils literal notranslate"><span class="pre">guess32.py</span></code>. Go ahead and run it a few times to make sure you understand how it works; feel free to insert other print statements if you want to know what executes and what doesn’t under different inputs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -451,7 +462,7 @@ document.write(`
 <p><strong>Step 3.</strong> What did you learn in Step 2 about using a try-except-statement?</p>
 </section>
 <section id="ale-5-4-adding-metadata-to-your-messages">
-<h2>ALE 5.4: Adding metadata to your messages<a class="headerlink" href="#ale-5-4-adding-metadata-to-your-messages" title="Permalink to this heading">#</a></h2>
+<h2>ALE 5.4: Adding metadata to your messages<a class="headerlink" href="#ale-5-4-adding-metadata-to-your-messages" title="Link to this heading">#</a></h2>
 <p>The networked guess-the-number game we’ve developed has the server send the client a message that it simply prints. In more interesting network conversations, one endpoint wants to send some data to the other endpoint and include with these data some <em>information about the data</em>. In computer science, this information about the data is called <em>metadata</em>.</p>
 <p>In this exercise, you are going to modify our guess-the-number game so that server sends messages that include metadata (the client messages are unchanged). The server will continue to send text that the client should print for the user, and it will add metadata indicating the color of the text when it is printed. The game will use color to add a visual hint about how good each guess was.</p>
 <p>Here are the new rules for our guess-the-number game:</p>
@@ -471,7 +482,7 @@ document.write(`
 <p>There are several ways to answer these questions. Debate a few ideas with your friends, and then settle on the simplest approach. This will inform how you’ll encode the values you enumerated into the previous question.</p>
 <p><strong>Step 2.</strong> To code this new version of the game, you need to know how to print text in color on a terminal screen. This involves sending some text to <code class="docutils literal notranslate"><span class="pre">print</span></code> that it interprets as an escape sequence. I demonstrate how this is done in the modified client code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap05/ale04-client.py</span>
-<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">socket32</span> <span class="kn">import</span> <span class="n">create_new_socket</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">socket32</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_new_socket</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>  <span class="c1"># The server&#39;s hostname or IP address</span>
 <span class="linenos"> 5</span><span class="n">PORT</span> <span class="o">=</span> <span class="mi">65432</span>        <span class="c1"># The port used by the server</span>
@@ -483,7 +494,7 @@ document.write(`
 <span class="linenos">11</span><span class="n">green</span> <span class="o">=</span>   <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[32m&#39;</span>
 <span class="linenos">12</span><span class="n">blue</span> <span class="o">=</span>    <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[34m&#39;</span>
 <span class="linenos">13</span>
-<span class="linenos">14</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">14</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
 <span class="linenos">15</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;## Welcome to &#39;</span> <span class="o">+</span> <span class="n">blue</span> <span class="o">+</span> <span class="s1">&#39;GUESS &#39;</span>
 <span class="linenos">16</span>         <span class="o">+</span> <span class="n">green</span> <span class="o">+</span> <span class="s1">&#39;THE &#39;</span> <span class="o">+</span> <span class="n">red</span> <span class="o">+</span> <span class="s1">&#39;NUMBER&#39;</span>
 <span class="linenos">17</span>         <span class="o">+</span> <span class="n">default</span> <span class="o">+</span> <span class="s1">&#39;! ##&#39;</span><span class="p">)</span>
@@ -515,7 +526,7 @@ document.write(`
 <p><strong>Step 3.</strong> Start <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> by making a copy of the <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> script developed in the chapter. Adapt <code class="docutils literal notranslate"><span class="pre">ale04-client.py</span></code> (above) and <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> so that they play this enhanced guess-the-number game.</p>
 </section>
 <section id="ale-5-5-abstraction-and-design">
-<h2>ALE 5.5: Abstraction and design<a class="headerlink" href="#ale-5-5-abstraction-and-design" title="Permalink to this heading">#</a></h2>
+<h2>ALE 5.5: Abstraction and design<a class="headerlink" href="#ale-5-5-abstraction-and-design" title="Link to this heading">#</a></h2>
 <p>You’ve grappled with the slippery topic of abstraction through the book’s first chapters and seen numerous examples of it. Abstraction hides the details necessary for the computer to perform our intended action, but which simultaneously distract us humans from a computation’s big picture. In general, we humans find it easier to think about the intended action in the abstract without all the details.</p>
 <p>However, even after you’ve decided where to place an abstraction barrier (i.e., the barrier that hides a solution’s details), you’ll be confronted with the choice of exactly how to design the abstraction. Recall Chapter 3’s example of a procedural abstraction for exponentiation where we asked if we should create separate <code class="docutils literal notranslate"><span class="pre">square</span></code> and <code class="docutils literal notranslate"><span class="pre">cube</span></code> functions, each taking a single input parameter, or a single <code class="docutils literal notranslate"><span class="pre">power</span></code> function taking two parameters. Or should we, as the Python standard library provides, create a single <code class="docutils literal notranslate"><span class="pre">power</span></code> function that takes at least two and sometimes three parameters?</p>
 <p>In this exercise, you’ll practice thinking through these sorts of choices in the context of a completely different problem. This exercise asks you to do design, not implementation. You’ll think about the problem, decide on some primitives (which will define your abstraction barrier), and what the interface to those primitives might look like (i.e., what the <code class="docutils literal notranslate"><span class="pre">def</span></code> line of a function for your primitive might look like).</p>
@@ -572,11 +583,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="chap04.html"
@@ -596,17 +606,16 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -640,6 +649,7 @@ By Mike Smith
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023 by Michael D. Smith. All rights reserved.
@@ -666,8 +676,8 @@ By Mike Smith
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

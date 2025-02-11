@@ -61,7 +61,7 @@ def find_w(the_string, pattern):
 
 **Step 4.** Create a code block that tests your `find_w` function.
 
-## ALE 3.2: Getting comfortable with \`range\`
+## ALE 3.2: Getting comfortable with `range`
 
 What is that `range` command? We discussed it as a function that produces an integer sequence whose length is its input parameter. Used in a for-loop, the loop can then assign each element of the generated sequence to its loop variable (e.g., variable `i` in the example below) and execute the loop body for each element.
 
@@ -75,7 +75,7 @@ for i in range(10):
 
 Questions:
 
-1. What is the first number printed? Why is that the default for the first value produced by \`range\`? What does it make easy? There is a way to specify the starting value of the range produced. Can you figure out how to change the starting value?
+1. What is the first number printed? Why is that the default for the first value produced by `range`? What does it make easy? There is a way to specify the starting value of the range produced. Can you figure out how to change the starting value?
 2. What is the difference between our input value to `range` and the final number printed? Why is this? When you change the starting value, what is the final value printed? What does the single parameter to `range` represent if it isn't the final value printed?
 
 Feel free to change the code block above as you answer these questions!

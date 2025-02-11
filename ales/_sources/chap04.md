@@ -337,7 +337,7 @@ To increase the number of responses that you'll check:
 
 **Step 1.** At the end of the loop in `ale05.py` that processes each returned response, add a new block of statements that prints the author(s) listed in each response.
 
-**Step 2.** Add another block of statments that prints the type of resource (i.e., the item is a text or a still image).
+**Step 2.** Add another block of statements that prints the type of resource (i.e., the item is a text or a still image).
 
 **Step 3.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
 
