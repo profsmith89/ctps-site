@@ -580,62 +580,17 @@ document.write(`
 </section>
 <section id="ale-4-5-json-makes-my-eyes-ache">
 <h2>ALE 4.5: JSON makes my eyes ache<a class="headerlink" href="#ale-4-5-json-makes-my-eyes-ache" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> script illustrated how we can pull apart a response from Harvard’s LibraryCloud API and determine if the Harvard Library system has a copy of <em>The Cat in the Hat</em> by Dr. Seuss. But this script printed only the titles of each resource in the response.</p>
-<p>I’ve copied <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> below, except that it asks for the top 4 results. See if you can extend the code in the following ways. Each will require you to read through the dumped JSON response and figure out the sequence of indexing operations you need to do to access the information you need to print. Be careful as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the <code class="docutils literal notranslate"><span class="pre">'titleInfo'</span></code> field.</p>
-<ol class="arabic simple">
-<li><p>Print the author’s name.</p></li>
-<li><p>Print the type of resource (i.e., the item is a text or a still image).</p></li>
-<li><p>If the resource is a text and the item includes an abstract, print it. The abstract for <em>The Cat in the Hat</em> is “Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games.”</p></li>
-</ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap04/qweb7.py</span>
-<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">json</span>
-<span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="linenos"> 6</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching HOLLIS for &quot;The Cat in the Hat&quot;&#39;</span><span class="p">)</span>
-<span class="linenos"> 7</span>
-<span class="linenos"> 8</span>    <span class="c1"># Concatenate the first 3 components of a URL for HTTP</span>
-<span class="linenos"> 9</span>    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
-<span class="linenos">10</span>    <span class="n">hostname</span> <span class="o">=</span> <span class="s1">&#39;api.lib.harvard.edu&#39;</span>
-<span class="linenos">11</span>    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/v2/items.json&#39;</span>
-<span class="linenos">12</span>    <span class="n">url</span> <span class="o">=</span> <span class="n">protocol</span> <span class="o">+</span> <span class="s1">&#39;://&#39;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="n">path</span>
-<span class="linenos">13</span>
-<span class="linenos">14</span>    <span class="c1"># Describe the query string as a Python dictionary</span>
-<span class="linenos">15</span>    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="s1">&#39;The Cat in the Hat&#39;</span><span class="p">,</span>
-<span class="linenos">16</span>             <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">4</span>
-<span class="linenos">17</span>    <span class="p">}</span>
-<span class="linenos">18</span>
-<span class="linenos">19</span>    <span class="c1"># Add a field to the request header saying what we accept</span>
-<span class="linenos">20</span>    <span class="n">accept</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
-<span class="linenos">21</span>
-<span class="linenos">22</span>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">accept</span><span class="p">)</span>
-<span class="linenos">23</span>
-<span class="linenos">24</span>    <span class="c1"># Read the response body in JSON format and print it</span>
-<span class="linenos">25</span>    <span class="n">j</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="linenos">26</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;response.json() =&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-<span class="linenos">27</span>
-<span class="linenos">28</span>    <span class="nb">print</span><span class="p">()</span>
-<span class="linenos">29</span>
-<span class="linenos">30</span>    <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;pagination&#39;</span><span class="p">][</span><span class="s1">&#39;numFound&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="linenos">31</span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Zero results&#39;</span><span class="p">)</span>
-<span class="linenos">32</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">33</span>        <span class="c1"># Process each returned response</span>
-<span class="linenos">34</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="s1">&#39;mods&#39;</span><span class="p">]):</span>
-<span class="linenos">35</span>            <span class="c1"># Print title info</span>
-<span class="linenos">36</span>            <span class="n">ti</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;titleInfo&#39;</span><span class="p">]</span>
-<span class="linenos">37</span>            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ti</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
-<span class="linenos">38</span>                <span class="c1"># Lots of title info; just print the first</span>
-<span class="linenos">39</span>                <span class="n">ti</span> <span class="o">=</span> <span class="n">ti</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="linenos">40</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Title #</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">41</span>            <span class="k">if</span> <span class="s1">&#39;nonSort&#39;</span> <span class="ow">in</span> <span class="n">ti</span><span class="p">:</span>
-<span class="linenos">42</span>                <span class="nb">print</span><span class="p">(</span><span class="n">ti</span><span class="p">[</span><span class="s1">&#39;nonSort&#39;</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="linenos">43</span>            <span class="nb">print</span><span class="p">(</span><span class="n">ti</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
-<span class="linenos">44</span>
-<span class="linenos">45</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="linenos">46</span>    <span class="n">main</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>[Version 20241204]</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> script illustrated how we can pull apart a response from Harvard’s LibraryCloud API and determine if the Harvard Library system has a copy of <em>The Cat in the Hat</em> by Dr. Seuss. But this script printed only the titles of each resource in the response (after dumping out the entire JSON response).</p>
+<p>This exercise asks you to pull other types of information from the JSON response, which will give you practice with Python dictionaries and lists and indexing into them. <strong>Be careful</strong> as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the <code class="docutils literal notranslate"><span class="pre">'titleInfo'</span></code> field.</p>
+<p>To increase the number of responses that you’ll check:</p>
+<ul class="simple">
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">qweb7.py</span></code> and name the copy <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code>.</p></li>
+<li><p>Change line 16 in the copy from <code class="docutils literal notranslate"><span class="pre">'limit':</span> <span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">'limit':</span> <span class="pre">4</span></code>.</p></li>
+</ul>
+<p><strong>Step 1.</strong> At the end of the loop in <code class="docutils literal notranslate"><span class="pre">ale05.py</span></code> that processes each returned response, add a new block of statements that prints the author(s) listed in each response.</p>
+<p><strong>Step 2.</strong> Add another block of statments that prints the type of resource (i.e., the item is a text or a still image).</p>
+<p><strong>Step 3.</strong> If the resource is a text and the item includes an abstract, print it. The abstract for <em>The Cat in the Hat</em> is “Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games.”</p>
+<p>[Version 20250211]</p>
 </section>
 </section>
 

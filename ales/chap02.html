@@ -328,6 +328,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-8-some-fearless-string-manipulation">ALE 2.8: Some fearless string manipulation</a></li>
 </ul>
             </nav>
         </div>
@@ -508,7 +509,40 @@ document.write(`
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">&quot;Wait!&quot;</span> <span class="pre">and</span> <span class="pre">you</span> <span class="pre">shake</span> <span class="pre">your</span> <span class="pre">head.</span> <span class="pre">&quot;Will</span> <span class="pre">this</span> <span class="pre">end?&quot;\n</span></code></p>
 <p>These examples ask you to label the text on either side of a double-quote character as if you split the file line on this character. Did you spot the pattern that emerges? Understanding this pattern is the key to writing code that processes a file line with any number of double quotes in it!</p>
-<p>[Version 20241204]</p>
+</section>
+<section id="ale-2-8-some-fearless-string-manipulation">
+<h2>ALE 2.8: Some fearless string manipulation<a class="headerlink" href="#ale-2-8-some-fearless-string-manipulation" title="Permalink to this heading">#</a></h2>
+<p>Changing a given string into a slightly different one or capturing a piece of it is something you’ll do in many problems. In this exercise, you’ll practice using indexing, slicing, string concatenation, and string splitting, which are foundational skills for string manipulation.</p>
+<p>We’ll use a line from Seuss’s <em>The Cat in the Hat</em> as our input string to be manipulated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">said_the_cat</span> <span class="o">=</span> <span class="s2">&quot;Now! Now! Have no fear. Have no fear!&quot;</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input line: </span><span class="si">{</span><span class="n">said_the_cat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copy the Python statements above and put them in a file called <code class="docutils literal notranslate"><span class="pre">ale08.py</span></code> in your <code class="docutils literal notranslate"><span class="pre">chap02</span></code> folder. Add each of the subsequent code blocks to this file as you begin each step. Run your solutions to make sure you successfully completed each challenge!</p>
+<p><strong>Step 1.</strong> What expression would you write to slice out the first four characters of <code class="docutils literal notranslate"><span class="pre">said_the_cat</span></code>? The code below names the slice <code class="docutils literal notranslate"><span class="pre">ans</span></code> and prints it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Step 1&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">ans</span> <span class="o">=</span> <span class="s1">&#39;REPLACE THIS LITERAL STRING WITH YOUR EXPRESSION&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 2.</strong> What expression would you write to slice the phrase <code class="docutils literal notranslate"><span class="pre">'no</span> <span class="pre">fear'</span></code> from <code class="docutils literal notranslate"><span class="pre">said_the_cat</span></code>?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Step 2&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">ans</span> <span class="o">=</span> <span class="s1">&#39;REPLACE THIS LITERAL STRING WITH YOUR EXPRESSION&#39;</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 3.</strong> What code would you write to make the Cat talk with no punctuation? In other words, remove the characters <code class="docutils literal notranslate"><span class="pre">'!'</span></code> and <code class="docutils literal notranslate"><span class="pre">'.'</span></code> from <code class="docutils literal notranslate"><span class="pre">said_the_cat</span></code>. HINT: You might want to loop over this string’s characters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Step 3&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="c1"># REPLACE THIS COMMENT WITH YOUR CODE</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 4.</strong> What code would you write to make the Cat talk backwards and again with any punctuation marks? You might want to start with your answer from Step 3. The answer to this step should look like, “fear no Have fear no Have Now Now”. As extra credit, remove the capitalization!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Step 4&#39;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="c1"># REPLACE THIS COMMENT WITH YOUR CODE</span>
+</pre></div>
+</div>
+<p>[Version 20250209]</p>
 </section>
 </section>
 
@@ -586,6 +620,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-5-counting-sentences">ALE 2.5: Counting sentences</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-6-abstractions">ALE 2.6: Abstractions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-7-problem-not-solved">ALE 2.7: Problem not solved!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-2-8-some-fearless-string-manipulation">ALE 2.8: Some fearless string manipulation</a></li>
 </ul>
   </nav></div>
 

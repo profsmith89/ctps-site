@@ -326,64 +326,19 @@ Don't ever write your private information as a literal in the scripts you develo
 
 ## ALE 4.5: JSON makes my eyes ache
 
-The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response.
+The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response (after dumping out the entire JSON response).
 
-I've copied `qweb7.py` below, except that it asks for the top 4 results. See if you can extend the code in the following ways. Each will require you to read through the dumped JSON response and figure out the sequence of indexing operations you need to do to access the information you need to print. Be careful as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field.
+This exercise asks you to pull other types of information from the JSON response, which will give you practice with Python dictionaries and lists and indexing into them. **Be careful** as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field.
 
-1. Print the author's name.
-2. Print the type of resource (i.e., the item is a text or a still image).
-3. If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
+To increase the number of responses that you'll check:
 
-```{code-block} python
----
-lineno-start: 1
----
-### chap04/qweb7.py
-import requests
-import json
+*   Copy `qweb7.py` and name the copy `ale05.py`.
+*   Change line 16 in the copy from `'limit': 2` to `'limit': 4`.
 
-def main():
-    print('Searching HOLLIS for "The Cat in the Hat"')
+**Step 1.** At the end of the loop in `ale05.py` that processes each returned response, add a new block of statements that prints the author(s) listed in each response.
 
-    # Concatenate the first 3 components of a URL for HTTP
-    protocol = 'https'
-    hostname = 'api.lib.harvard.edu'
-    path = '/v2/items.json'
-    url = protocol + '://' + hostname + path
+**Step 2.** Add another block of statments that prints the type of resource (i.e., the item is a text or a still image).
 
-    # Describe the query string as a Python dictionary
-    query = {'q': 'The Cat in the Hat',
-             'limit': 4
-    }
+**Step 3.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
 
-    # Add a field to the request header saying what we accept
-    accept = {'Accept': 'application/json'}
-
-    response = requests.get(url, params=query, headers=accept)
-
-    # Read the response body in JSON format and print it
-    j = response.json()
-    print("response.json() =", json.dumps(j, indent=4))
-
-    print()
-
-    if j['pagination']['numFound'] == 0:
-        print('Zero results')
-    else:
-        # Process each returned response
-        for i, item in enumerate(j['items']['mods']):
-            # Print title info
-            ti = item['titleInfo']
-            if type(ti) == list:
-                # Lots of title info; just print the first
-                ti = ti[0]
-            print(f"Title #{i}: ", end='')
-            if 'nonSort' in ti:
-                print(ti['nonSort'], end='')
-            print(ti['title'])
-
-if __name__ == '__main__':
-    main()
-```
-
-\[Version 20241204\]
+\[Version 20250211\]
