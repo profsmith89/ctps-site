@@ -328,17 +328,24 @@ Don't ever write your private information as a literal in the scripts you develo
 
 The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response (after dumping out the entire JSON response).
 
-This exercise asks you to pull other types of information from the JSON response, which will give you practice with Python dictionaries and lists and indexing into them. **Be careful** as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field.
+This exercise asks you to pull other types of information from the JSON response, which will give you practice with Python dictionaries and lists and indexing into them.
 
-To increase the number of responses that you'll check:
+**Step 1.** You'll start with a practice on indexing through a hierarchy of Python dictionaries and lists.
 
-*   Copy `qweb7.py` and name the copy `ale05.py`.
-*   Change line 16 in the copy from `'limit': 2` to `'limit': 4`.
+*   Look at `ale05.py` and `ale05_step1.py`. `ale05.py` is mostly a copy of `qweb7.py`, except that it imports `ale05_step1.py` and checks on line 29 whether you're working on this step or a later one. You'll also notice that there are comments starting on line 55 that show you where to put your answers to this step and the subsequent ones.
 
-**Step 1.** At the end of the loop in `ale05.py` that processes each returned response, add a new block of statements that prints the author(s) listed in each response.
+*   `ale05_step1.py` exists to define a fake response from HOLLIS. It doesn't contain the full complexity of a HOLLIS response and lets you focus on indexing into dictionaries of lists and sub-dictionaries. The `main` routine in this module runs a simple test that indexes into a dictionary that is contained in another dictionary.
 
-**Step 2.** Add another block of statements that prints the type of resource (i.e., the item is a text or a still image).
+In `ale05.py`, add statements below line 55 so that the loop on line 44 prints the author information (if any) for each title in the response.
 
-**Step 3.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
+**Step 2.** The first step eliminates a piece of complexity in a real HOLLIS response: some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field (lines 45-49). In this step, you'll handle this complexity for grabbing author information.
 
-\[Version 20250211\]
+*   First, change the variable `STEP1` on line 8 to `False` and comment out your solution to Step 1.
+
+*   After the comment that says "STEP 2", write the general solution to printing the author information.
+
+**Step 3.** Add another block of statements that prints the type of resource (i.e., the item is a text or a still image).
+
+**Step 4.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
+
+\[Version 20250217\]
