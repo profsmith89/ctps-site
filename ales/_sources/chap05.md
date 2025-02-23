@@ -221,7 +221,7 @@ if __name__ == '__main__':
 
 Notice that I've named the different escape sequences with a descriptive name. To turn on the printing of text in red, you simply print the `red` escape sequence. To turn off printing text in red, you need to insert the escape sequence of a different color or use the return-to-default-color escape sequence, which I've named `default`. I've printed the capitalized name of the game in our three different colors as an example.
 
-**Step 3.** Start `ale04-server.py` by making a copy of the `guess-server.py` script developed in the chapter. Adapt `ale04-client.py` (above) and `ale04-server.py` so that they play this enhanced guess-the-number game.
+**Step 3.** Adapt `ale04-client.py` and `ale04-server.py` so that they play the enhanced guess-the-number game.
 
 ## ALE 5.5: Abstraction and design
 
