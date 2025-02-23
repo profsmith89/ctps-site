@@ -161,7 +161,7 @@ assert(the_sky == 'is blue')
 print('It must be because execution got here!')
 ```
 
-**Step 2.** Be careful with your parentheses in this statement.  `assert` is **not** a command, but a kind of Python statement. We can rewrite the code block above in the follow ways:
+**Step 2.** Be careful with your parentheses in this statement.  `assert` is **not** a command, but a kind of Python statement. We can rewrite the code block above in the following ways:
 
 ```{code-block} python
 ---
