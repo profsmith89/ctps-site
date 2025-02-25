@@ -324,6 +324,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-1-parameters-and-parentheses">ALE 8.1: Parameters and Parentheses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-2-erase-the-duck">ALE 8.2: Erase the Duck</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-3-create-and-fix-your-own-photobomb">ALE 8.3: Create and Fix Your Own Photobomb</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-4-coarsen-a-street-number">ALE 8.4: Coarsen a street number</a></li>
 </ul>
             </nav>
         </div>
@@ -464,7 +465,65 @@ document.write(`
 <li><p>Make sure you saved the reduced images in RGB, not RGBA, format.</p></li>
 </ol>
 <p><strong>Step 2.</strong> Run your images through the script you built in 8.2. Show your friends and family!</p>
-<p>[Version 20241204]</p>
+</section>
+<section id="ale-8-4-coarsen-a-street-number">
+<h2>ALE 8.4: Coarsen a street number<a class="headerlink" href="#ale-8-4-coarsen-a-street-number" title="Permalink to this heading">#</a></h2>
+<p>You may recall an ALE from Chapter 3 that had you use string processing to coarsen the house number in a street address. In this exercise, you’ll strengthen your understanding of bitwise operators to accomplish a similar outcome.</p>
+<p>The task is to take a street address like “119 Reed St” and mask out parts of its house number. In the exercise from Chapter 3, we turned this street address into “1XX Reed St” and this time we’ll make it “000 Reed St”. In other words, you’ll turn every numerical digit in a street address into the digit 0.</p>
+<p><strong>Step 1.</strong> The script <code class="docutils literal notranslate"><span class="pre">ale04.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">chap08</span></code> distribution contains a lot of the code you need to complete this task and run some checks. I’ve copied this starter code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### chap08/ale04.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># A list of messy, complete street addresses and the expected,</span>
+<span class="linenos"> 4</span><span class="c1"># coarsened equivalents. Your task is to complete the function</span>
+<span class="linenos"> 5</span><span class="c1"># `coarsen` so that it produces the second string from the</span>
+<span class="linenos"> 6</span><span class="c1"># first using only bitwise operations, and the built-in</span>
+<span class="linenos"> 7</span><span class="c1"># functions `ord` and `chr`.</span>
+<span class="linenos"> 8</span><span class="n">addrs</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 9</span>    <span class="p">(</span><span class="s2">&quot;119 Reed St&quot;</span><span class="p">,</span> <span class="s2">&quot;000 Reed St&quot;</span><span class="p">),</span>
+<span class="linenos">10</span>    <span class="p">(</span><span class="s2">&quot;253 Rindge St&quot;</span><span class="p">,</span> <span class="s2">&quot;000 Rindge St&quot;</span><span class="p">),</span>
+<span class="linenos">11</span>    <span class="p">(</span><span class="s2">&quot;6 Emmons Pl&quot;</span><span class="p">,</span> <span class="s2">&quot;0 Emmons Pl&quot;</span><span class="p">),</span>
+<span class="linenos">12</span>    <span class="p">(</span><span class="s2">&quot;   113 Walker St&quot;</span><span class="p">,</span> <span class="s2">&quot;000 Walker St&quot;</span><span class="p">),</span>
+<span class="linenos">13</span>    <span class="p">(</span><span class="s2">&quot;109 Walker St      &quot;</span><span class="p">,</span> <span class="s2">&quot;000 Walker St&quot;</span><span class="p">),</span>
+<span class="linenos">14</span>    <span class="p">(</span><span class="s2">&quot; 30 Clay St  &quot;</span><span class="p">,</span> <span class="s2">&quot;00 Clay St&quot;</span><span class="p">),</span>
+<span class="linenos">15</span>    <span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">  40 Montgomery St&quot;</span><span class="p">,</span> <span class="s2">&quot;00 Montgomery St&quot;</span><span class="p">),</span>
+<span class="linenos">16</span><span class="p">]</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">coarsen</span><span class="p">(</span><span class="n">full_addr</span><span class="p">):</span>
+<span class="linenos">19</span><span class="w">    </span><span class="sd">&#39;&#39;&#39;Given a messy full street address return a clean coarsened one&#39;&#39;&#39;</span>
+<span class="linenos">20</span>    <span class="n">coarsened_addr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos">21</span>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">full_addr</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+<span class="linenos">22</span>        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+<span class="linenos">23</span>            <span class="k">pass</span>
+<span class="linenos">24</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">25</span>            <span class="n">coarsened_addr</span> <span class="o">+=</span> <span class="n">c</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="n">coarsened_addr</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos">30</span>    <span class="s2">&quot;Driver that tests your function.&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>    <span class="k">for</span> <span class="n">full_addr</span><span class="p">,</span> <span class="n">coarsened_addr</span> <span class="ow">in</span> <span class="n">addrs</span><span class="p">:</span>
+<span class="linenos">33</span>        <span class="n">r</span> <span class="o">=</span> <span class="n">coarsen</span><span class="p">(</span><span class="n">full_addr</span><span class="p">)</span>
+<span class="linenos">34</span>        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="n">coarsened_addr</span><span class="p">:</span>
+<span class="linenos">35</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PASSED on test: &quot;</span><span class="si">{</span><span class="n">full_addr</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">36</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">37</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;FAILED on &quot;</span><span class="si">{</span><span class="n">full_addr</span><span class="si">}</span><span class="s1">&quot;, returned:</span><span class="se">\n\t</span><span class="s1">&quot;</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">40</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Much of the <code class="docutils literal notranslate"><span class="pre">coarsen</span></code> function is written for you. As you can see, it processes each character <code class="docutils literal notranslate"><span class="pre">c</span></code> in the input <code class="docutils literal notranslate"><span class="pre">full_addr</span></code> and either leaves the character untouched or recognizes it as a number (via the <code class="docutils literal notranslate"><span class="pre">isnumeric</span></code> method on Python strings) and changes it before adding it to the new <code class="docutils literal notranslate"><span class="pre">coarsened_addr</span></code> string. Well, it should change the numeric characters, but the body of the if-statement (line 23) currently does nothing. Replace the <code class="docutils literal notranslate"><span class="pre">pass</span></code> statement with your solution.</p>
+<p>Your solution should use only:</p>
+<ul class="simple">
+<li><p>bitwise operators;</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">ord</span></code> function that turns a string containing a single character into its numerical encoding. For example, <code class="docutils literal notranslate"><span class="pre">ord('a')</span></code> returns <code class="docutils literal notranslate"><span class="pre">97</span></code>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#ord">as the Python documentation states</a>; and</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">chr</span></code> function that goes in the opposite direction of <code class="docutils literal notranslate"><span class="pre">ord</span></code>: given an integer, it returns a string with a single character. That character’s encoding is the given integer.</p></li>
+</ul>
+<p>HINT: Before you attempt to do any design, use <code class="docutils literal notranslate"><span class="pre">ord</span></code> to see what the encodings are for the numerical characters <code class="docutils literal notranslate"><span class="pre">'0'</span></code> through <code class="docutils literal notranslate"><span class="pre">'9'</span></code>. You might then look at the binary encodings of these encodings using <code class="docutils literal notranslate"><span class="pre">bin</span></code>. Finally, figure out how to use a bitmask and a bitwise operator to change just the bits in the encoding from the character it is to the one you want.</p>
+<p><strong>Step 2.</strong> With the solution to Step 1 in hand, you can change the masking to use any number you’d like. Perhaps you like <code class="docutils literal notranslate"><span class="pre">7</span></code> better than <code class="docutils literal notranslate"><span class="pre">0</span></code>, and you want “1XX Reed St” to turn into “777 Reed St”. See if you can adjust your previous solution to bitwise-or in your favorite number.</p>
+<p>HINT: You can use all your previous solution and just include this one extra bitwise operation. You don’t even have to turn your favorite number into a character encoding because of the way that the numerical digits are encoded!</p>
+<p>[Version 20250225]</p>
 </section>
 </section>
 
@@ -538,6 +597,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-1-parameters-and-parentheses">ALE 8.1: Parameters and Parentheses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-2-erase-the-duck">ALE 8.2: Erase the Duck</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-3-create-and-fix-your-own-photobomb">ALE 8.3: Create and Fix Your Own Photobomb</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-8-4-coarsen-a-street-number">ALE 8.4: Coarsen a street number</a></li>
 </ul>
   </nav></div>
 
