@@ -326,6 +326,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-6-an-informed-search">ALE 11.6: An informed search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-7-classes-in-oo-programming">ALE 11.7: Classes in OO programming</a></li>
 </ul>
             </nav>
         </div>
@@ -382,7 +384,72 @@ document.write(`
 <section id="ale-11-5-build-your-own-class">
 <h2>ALE 11.5: Build your own class<a class="headerlink" href="#ale-11-5-build-your-own-class" title="Permalink to this heading">#</a></h2>
 <p>[Insert an edited version of Kitty’s ALE 11.2 titled “Build your own Pin” that has the student build their own class. It would be nice if it tied into the map motif as `Pin` did.]</p>
-<p>[Version 20241204]</p>
+</section>
+<section id="ale-11-6-an-informed-search">
+<h2>ALE 11.6: An informed search<a class="headerlink" href="#ale-11-6-an-informed-search" title="Permalink to this heading">#</a></h2>
+<p>The depth-first and breadth-first approaches presented in Chapter 11 work for any goal-directed search problem. Because they are agnostic to the specifics of your problem, they are called <em>uninformed</em> searches. It’s possible to build an <em>informed</em> search, as mentioned briefly in the chapter’s last section, by incorporating problem-specific information into the search algorithm.</p>
+<p>This exercise introduces you to a popular informed search, called <em>A* search</em>, and the use of <em>heuristic functions</em>. A heuristic function knows something about the particular problem you’re tackling, and thus the crafting of a heuristic makes your script better for certain goal-directed search problems and not useful for others.</p>
+<p>The purpose of a heuristic is to help your algorithm choose among the nodes in your frontier list, and if it is good heuristic, it will suggest nodes that will help the algorithm move more quickly to the goal.</p>
+<blockquote>
+<div><p>Example: When computing a set of driving directions, you might
+want your search algorithm to give priority to nodes on the frontier list that have the smallest, as-the-crow-flies distance between the current point and the goal.</p>
+</div></blockquote>
+<p>This example describes a heuristic. It encourages the search algorithm to move in the direction of the goal, rather than in any random direction, which is often a reasonable thing to do. But this encouragement might not always produce the best driving directions (e.g., it might have you turn into a cul-de-sac).</p>
+<p>In effect, heuristics compute a simpler version of your problem. By simpler, I mean that we’ve eliminated some of the problem’s constraints. Computing the as-the-crow-flies distance removes the constraint that we have to drive on a road.</p>
+<p><strong>Step 1.</strong> A popular informed algorithm is the A* pathfinding algorithm, which was formally described by Peter Hart, Nils Nilsson, and Bertram Raphael of the Stanford Research Institute in 1968. Their goal was to build a robot that could find its own way in our world of obstacles and do so expending as little wasted movement as possible.</p>
+<p>To gain a general understanding of how A* pathfinding works in a driving directions context, please watch the first 6 minutes of <a class="reference external" href="https://www.youtube.com/watch?v=-L-WgKMFuhE">this 12-minute video by Sebastian Lague</a>. Pay particular attention to G, H, and F costs computed for each node. Notice that G is a known cost (i.e., it is exactly the minimal cost of moving from start to the current location) and H is a heuristic cost (i.e., it is the minimal cost of moving from the current location to the goal while paying no attention to the obstacles on the map—an as-the-crow-flies distance computation).</p>
+<p><strong>Step 2.</strong> The programming problem set that goes with this chapter has you find a connection between two actors by searching for a string of actors. The constraint on the string is that adjacent actors must have starred together in a movie. Our example heuristic for driving directions makes no sense for this new problem because physical distance has no meaning when we want to link actors through their movies.</p>
+<p>What facts about movies and actors might help you discover an appropriate heuristic? When considering which actor on the frontier to choose next, these facts should help move you in the “right direction” and make you feel like you’re eliminating those who are unlikely co-stars of your goal actor. Write down a few sentences describing this heuristic and why it might work well.</p>
+<p>You’ve begun designing heuristics!</p>
+</section>
+<section id="ale-11-7-classes-in-oo-programming">
+<h2>ALE 11.7: Classes in OO programming<a class="headerlink" href="#ale-11-7-classes-in-oo-programming" title="Permalink to this heading">#</a></h2>
+<p>Object-oriented (OO) programming is complicated because it is meant to be flexible enough to create data structures that reflect the complexity of the world around us.</p>
+<p><strong>Step 1.</strong> I want you to read an online tutorial that doesn’t necessarily use OO programming to solve a particular problem (as we repeatedly do in this book) but instead focuses on the syntax for building a class. My hope is that the problem-solving foundation provided in Chapter 11 gives you a context in which to appreciate the simple, syntax-driven examples in tradtional OO tutorials.</p>
+<p>There are many good tutorials out there. It doesn’t matter which you read, but I recommend <a class="reference external" href="https://realpython.com/python3-object-oriented-programming/">“Object-Oriented Programming (OOP) in Python 3” on RealPython by David Amos (December 15, 2024)</a>.</p>
+<p>Feel free to skim and then dig in where you find something interesting. My goal in this reading isn’t to make you an expert in OO programming but to increase your comfort with it and its terminology.</p>
+<p><strong>Step 2.</strong> David Amos’s tutorial defines a class with which we can create objects of type <code class="docutils literal notranslate"><span class="pre">Dog</span></code>. I’ve copied his <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Dog</span></code> below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### dog.py from David Amos&#39;s RealPython tutorial</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Canis familiaris&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old&quot;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> says </span><span class="si">{</span><span class="n">sound</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Using this class definition, David Amos defines several <em>child</em> classes, which derive from the parent class <code class="docutils literal notranslate"><span class="pre">Dog</span></code>. I, of course, added my own (i.e., <code class="docutils literal notranslate"><span class="pre">YellowLab</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span><span class="c1">### also in David Amos&#39;s RealPython tutorial</span>
+<span class="linenos">16</span><span class="k">class</span> <span class="nc">JackRussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">pass</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">class</span> <span class="nc">Dachshund</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">20</span>    <span class="k">pass</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">23</span>    <span class="k">pass</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># Mike&#39;s addition</span>
+<span class="linenos">26</span><span class="k">class</span> <span class="nc">YellowLab</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">27</span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>What will be printed if you define the classes above and then run the following statements?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">29</span><span class="n">cosmo</span> <span class="o">=</span> <span class="n">YellowLab</span><span class="p">(</span><span class="s2">&quot;Cosmo&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">cosmo</span><span class="p">):</span>
+<span class="linenos">32</span>    <span class="k">if</span> <span class="n">attribute</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+<span class="linenos">33</span>        <span class="nb">print</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should now have a better idea of what it means when a child class inherits attributes and methods of its parent class.</p>
+<p>[Version 20250327]</p>
 </section>
 </section>
 
@@ -458,6 +525,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-6-an-informed-search">ALE 11.6: An informed search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-7-classes-in-oo-programming">ALE 11.7: Classes in OO programming</a></li>
 </ul>
   </nav></div>
 
