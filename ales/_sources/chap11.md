@@ -1,16 +1,113 @@
 # Chapter 11
 
-## ALE 11.1: Dictionary of dictionaries
+## ALE 11.1: Dictionary of Dictionaries
 
-\[Insert an edited version of Kitty's ALE 11.1.\]
+The `class Pin` described in Chapter 11 defines a data structure for a Google Maps-like pin. With instances of this data type, we were able to mark Cosmo's favorite places.
 
-## ALE 11.2: Making print work
+A `Pin` object records:
 
-\[Insert an edited version of Kitty's ALE 11.X titled "How the heck do you print a pin?" This will help the students to understand how they can add methods to an existing class and explain the difference between \`\_\_str\_\_\` and \`\_\_expr\_\_\` through a problem-to-be-solved.\]
+*   a location (i.e., an x-y tuple of integers)
+*   a name for the location (i.e., a string)
+*   a short note about the location (i.e., a string)
+*   a rating in stars (i.e., an integer)
+*   an icon for the map (i.e., a string emoji), which was computed in the class's constructor code.
 
-## ALE 11.3: More power to the constructor
+In this exercise, we'll use a dictionary instead of a class as the structure for a `Pin`. We'll see that this approach isn't as good as using a class, but it does permit the use of descriptive strings to access the components of a dictionary-based `Pin` similar to the way we used descriptive data attributes in the chapter's `Pin` class. Let's see how this dictionary-based approach works out.
 
-\[Insert an edited version of Kitty's ALE 11.X titled the same as this ALE. Change the task: support more icons by understanding the star rating and something from the note field.\]
+Please complete the following steps in the script `chap11/ale01.py`.
+
+**Step 1.** Look at the start of the function `make_3_pins` in `ale01.py`, which builds three pins using the Python dictionary data type and duplicates the data attribute values on lines 58-60 of `pin.py`.
+
+> Insert a few Python statements at the end of the `make_3_pins` function body so that this function prints just the names of the three pins (i.e., you should print the value of the `name` key). Print the names of the different pins on separate lines.
+
+Test your solution by running `python3 ale01.py 1`.
+
+**Step 2.** As you undoubtedly noticed, it's not a great design to choose a name for each pin. If we were to add a new pin, we'd have to change the code in the function `make_3_pins` to both define **and print** this new pin using its unique name. Many of the tasks we might want to do (beyond printing) would benefit from a data structure that contained our collection of all pins. The script `pin.py` used a Python list for this purpose. Let's do something different here.
+
+Let's store our individual pins in a dictionary, which would create a _dictionary of dictionaries_. We've seen this type of data structure back in Chapter 4, where the JSON file format returned by web requests involved lots of dictionaries nested inside other dictionaries. 
+
+As you start to consider this work, you'll realize that you have to choose a key for each dictionary that you store in the returned dictionary. What kind of unique identifier should we use for the keys in this "outer" dictionary?
+
+Arguably, two pins could have the same name. They could also include the same note. Obviously, there are few possible star ratings and many possible pins. None of these seems like good candidates.
+
+Here are two reasonable but imperfect choices:
+
+1.  We might use a pin's location as its key in the outer dictionary. If we restrict each (x,y) location in our map so that it can take only one pin, this approach would work nicely.
+
+2.  We might alternatively use strings like "pin1" and "pin2" and so forth. By taking the `len` of this outer dictionary, we would know the next key string to generate when we wanted to add a new pin. Unfortunately, this scheme starts to fall apart when we delete keys from the dictionary. Do you see why?
+
+Let's go with the first choice.
+
+> Add a return statement to the end of `make_3_pins` that returns this dictionary of dictionaries. You'll notice that the call to `make_3_pins` in `main` under `** STEP 2**` sets the name `pins` to the value returned from `make_3_pins`.
+
+Test your solution by running `python3 ale01.py 2`.
+
+**Step 3.** Insert a print-statement that prints the `name` of the pin at location `(3,11)`. This statement goes in `main` where it says `INSERT STEP 3 SOLUTION CODE HERE`. The name `pin1` is undefined in `main`, and you must start with the name `pins`.
+
+Test your solution by running `python3 ale01.py 3`.
+
+**Step 4.** Insert a loop that prints the locations, names, and ratings of all of the pins in `pins`. You might have it say something interesting for each pin like, "Cosmo rated Cat at (5,3) with 1 star(s)."
+
+Test your solution by running `python3 ale01.py 4`.
+
+**Step 5.** Read about [looping through the items in a Python dictionary using the method `items`](https://docs.python.org/3/tutorial/datastructures.html#looping-techniques) and rewrite your solution to Step 4 (where it says `INSERT STEP 5 SOLUTION CODE HERE`).
+
+Test your solution by running `python3 ale01.py 5`.
+
+**Step 6.** On his most recent walk, Cosmo found a bakery at (9,1) that gives out dog treats for free, and rated it 5 stars. Write a line of code that adds this place to `pins`. Do NOT set the key `'loc'` in this new inner dictionary.
+
+Test your solution by running `python ale01.py 6`, which will use the printing loop from step 5 to show you how you did.
+
+**Step 7.** So far, this seems like a good solution. Why did we have to learn all this crazy syntax for Python classes?
+
+Well, the `class Pin` in `pin.py` also defines an instance variable named `icon` that is computed in the `Pin.__init__` method. How would you add this key to each of your inner dictionaries? You'd write a function, which we'll call `set_pin_icon`.
+
+> Insert a function body for `set_pin_icon`, which you'll find between the definition of `make_3_pins` and `main` in `ale01.py`. This function takes one formal parameter, which is a pin to analyze and adds a key called `icon` to it. The value of this key should be `green_heart` if stars is less than or equal to 3 and `red_x` otherwise.
+
+Test your solution by running `python3 ale01.py 7`.
+
+> Notice how we've just made the code for constructing a valid pin (i.e., one that adheres to the representation invariant for pins) in multiple places in `ale01.py`. This is a maintenance nightmare and one of the primary reasons that many programmers swear by object-oriented techniques and the resulting encapsulation features.
+
+## ALE 11.2: Build your own
+
+\[Insert a problem that requires the design of a simple class.\]
+
+## ALE 11.3: Is it better?
+
+Recall that the `class Pin` in `pin.py` is a subclass of the Python `object` class. Let's understand better what that means and how we can do some subclassing and defining of magic methods.
+
+**Step 1.** Open the script `ale03.py` and review the a list of pins created at the start of `main`. The pins in the `pins` list are of type `Pin`.
+
+As we're walking Cosmo around our city, we might want to know whether two pins are equivalent (in some fashion) or if one is better than another. Run `ale03.py` in the following fashion:
+
+`python3 ale03.py 1`
+
+This runs the code under the comment `STEP 1`. From the printout, you'll that the first and fourth pins are not considered equal, but a pin is equal to itself. OK, this probably makes some sense to you.
+
+**Step 2.** What does the Python interpreter think when we ask whether the first pin is greater than (`>`) the second? Run `python3 ale03.py 2`.
+
+Oh no, we got a `TypeError`. The interpreter doesn't know how to compare two pins in this manner.
+
+This is because we haven't built functionality in our `Pin` class to handle comparisons using `>`. Of course, we didn't build the equality functionality either (look at the definition of `class Pin` in `pin.py`), but Python's `object` class defined some kind of equality test.
+
+**Step 3.** We can, however, implement the `>` operator by defining the magic method `__gt__` in our class. Let's do this in a subclass or `Pin` so that we don't mess up the nicely working `Pin` class.
+
+At the top of `ale03.py`, you'll find a definition for the new `class Pin2` that derives from the `class Pin` (i.e., because `Pin` is in the parentheses on line 5 of `ale03.py`). The constructor for this class is a bit tricky as it is implemented using default parameters to allow you to create a pin by specifying either:
+
+*  all its required data attributes (and in this case it simply calls the `Pin` constructor); or
+*  a `Pin` object whose data attributes it copies.
+
+After the Step 2 code in `main`, you'll see both these methods used to create a bunch `Pin2` objects that are copies of the original `Pin` objects.
+
+Run `python3 ale03.py 3` to see that these constructor calls worked correctly.
+
+**Step 4.** In the definition of `class Pin2`, you'll see that I defined the magic method `__gt__` that checks to see if the current object's `stars` rating is greater than the pin that was passed as the `pin` paramter. The current object is to the left-hand side of a `>` sign and the passed parameter to the right-hand side.
+
+Run `python3 ale03.py 4` to see this magic method work. No more `TypeError`!
+
+**Step 5.** Your last task in this exercise is to override the `__eq__` magic method in the Python `object` class with the implementation we want for the `==` operator in the `Pin2` class. Specifically, we want `==` to return `True` when a pin's `stars` rating is equal to another pin's `stars` rating and `False` otherwise.
+
+See if you can write a method definition for `__eq__` in `class Pin2`, and test it by running `python3 ale03.py 5`. HINT: The printout should NOT say false and false.
 
 ## ALE 11.4: See the path
 
@@ -53,9 +150,9 @@ Comment out the original line and then change the duplicate into the following:
 
 Run your script and take a look at the solution. Do you like the route it found? If not, how might you change your script to have it find and print a more direct route from start to goal?
 
-## ALE 11.5: Build your own class
+## ALE 11.5: TBW
 
-\[Insert an edited version of Kitty's ALE 11.2 titled "Build your own Pin" that has the student build their own class. It would be nice if it tied into the map motif as \`Pin\` did.\]
+\[Placeholder for a new problem.\]
 
 ## ALE 11.6: An informed search
 
