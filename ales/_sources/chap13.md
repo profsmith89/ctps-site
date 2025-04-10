@@ -18,7 +18,7 @@ def get_wordlist(line):
             for w in line.split()]
 ```
 
-**Step 1.** We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you should understand its operation, and if not, review our earlier work with `str.replace`.
+**Step 1.** We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you understand its operation, and if not, review our earlier work with `str.replace`.
 
 **Step 2.** Line 22, which continues on line 23, is where the interesting stuff happens. To understand this statement, first recognize that the outermost square brackets define a *Python list comprehension*, which is a shorthand for creating a new list from the values in an existing list. The "existing list" comes from a straightforward `str.split` of the input line, which removes whitespace but leaves "words" like `'best!"'`, which you'll see if you run the next code block.
 
