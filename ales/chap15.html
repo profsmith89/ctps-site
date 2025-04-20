@@ -298,7 +298,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -314,6 +316,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-15-1-bug-hunting-with-repl32-py">ALE 15.1: Bug hunting with repl32.py</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-15-2-bug-hunting-revisited">ALE 15.2: Bug hunting revisited</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -325,7 +336,32 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-15">
 <h1>Chapter 15<a class="headerlink" href="#chapter-15" title="Permalink to this heading">#</a></h1>
-<p>[Page intentionally blank]</p>
+<section id="ale-15-1-bug-hunting-with-repl32-py">
+<h2>ALE 15.1: Bug hunting with <a class="reference external" href="http://repl32.py">repl32.py</a><a class="headerlink" href="#ale-15-1-bug-hunting-with-repl32-py" title="Permalink to this heading">#</a></h2>
+<p>Chapter 15 builds several Python scripts that allow you to stop and dig into the execution environment of a script that is giving you trouble or one whose operation you’d like to better understand. The script that is giving Mike trouble is <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>, a card game from his childhood that he’s writing. You’ll use <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> to find its runtime error.</p>
+<p><strong>Step 1.</strong> We’ll begin by looking at how the code in <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> builds a card deck and prints the cards in it. Open the script <code class="docutils literal notranslate"><span class="pre">deck.py</span></code>, and notice that it calls the <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> function from <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. Depending on how you answer its question, <code class="docutils literal notranslate"><span class="pre">deck.py</span></code> will produce either a shuffled or sorted deck.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">deck.py</span></code> and try it with both answers.</p>
+<p><strong>Step 2.</strong> Open <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> and look at the body of the <code class="docutils literal notranslate"><span class="pre">shuffle</span></code> function. It builds <code class="docutils literal notranslate"><span class="pre">deck</span></code> using a list comprehension that contains a doubly nested for-loop. <code class="docutils literal notranslate"><span class="pre">suits</span></code> and <code class="docutils literal notranslate"><span class="pre">ranks</span></code> are defined on lines 4-13 of <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>.</p>
+<p>What happens if you change the order of the items in the lists on line 9 or 13? Make a change and rerun <code class="docutils literal notranslate"><span class="pre">deck.py</span></code>.</p>
+<p>Undo whatever changes you made to <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> before moving on.</p>
+<p><strong>Step 3.</strong> Okay, let’s start playing <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">kings.py</span></code> and answer “y” to the question that asks whether you need to see a listing of the directions to the game. Read the directions.</p>
+<p><strong>Step 4.</strong> Next, answer “n” to the question whether you want to play against an AI. When you press return, you’ll see that the execution dies with a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> on line 187 in <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. You could start digging through <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> trying to understand its code, or you could edit <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> to add a debugging print in the function <code class="docutils literal notranslate"><span class="pre">count_points</span></code>, which starts on line 174, or you could rerun <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> under the control of <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code>. That’s choose that last option.</p>
+<p><strong>Step 5.</strong> Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">repl32.py</span></code> and answer “<a class="reference external" href="http://kings.py">kings.py</a>” when asks what scripot you’d like to instrument. Then answer “187” when it asks for a line number in the script. Recall that this is the line that produced a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+<p>When you press return after typing “187”, you’ll see the prompts from <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> because <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> edited <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> and then started this edited script running.</p>
+<p>As earlier, say no to needing directions and playing against an AI.</p>
+<p>When given with a <code class="docutils literal notranslate"><span class="pre">repl&gt;</span></code> prompt, look at the body of the function <code class="docutils literal notranslate"><span class="pre">count_points</span></code> decide for which variables you’d like to know their values. For example, if you want to know the value of <code class="docutils literal notranslate"><span class="pre">rank</span></code>, you’d type <code class="docutils literal notranslate"><span class="pre">rank</span></code> at the <code class="docutils literal notranslate"><span class="pre">repl&gt;</span></code> prompt just as if it were the interactive Python interpreter.</p>
+<p>Do you like the value of the player’s hand passed as a parameter to <code class="docutils literal notranslate"><span class="pre">count_points</span></code>?</p>
+<p><strong>Step 6.</strong> The function <code class="docutils literal notranslate"><span class="pre">count_points</span></code> is called at the start of the function <code class="docutils literal notranslate"><span class="pre">winner</span></code> in <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. It makes no changes to its formal parameters before sending them off to <code class="docutils literal notranslate"><span class="pre">count_points</span></code> and so the error must in <code class="docutils literal notranslate"><span class="pre">main</span></code> that calls <code class="docutils literal notranslate"><span class="pre">winner</span></code>.</p>
+<p>Rerun <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">repl32.py</span></code> using the line number in <code class="docutils literal notranslate"><span class="pre">main</span></code> that calls <code class="docutils literal notranslate"><span class="pre">winner</span></code> and see if you can figure out what Mike did wrong.</p>
+</section>
+<section id="ale-15-2-bug-hunting-revisited">
+<h2>ALE 15.2: Bug hunting revisited<a class="headerlink" href="#ale-15-2-bug-hunting-revisited" title="Permalink to this heading">#</a></h2>
+<p>When you worked your way through ALE 15.1, you probably noticed that there are two <code class="docutils literal notranslate"><span class="pre">count_points</span></code> functions in <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. You used the uncommented one (lines 174-188) for ALE 15.1. Comment out that version and uncomment the one on lines 190-204 for this exercise. Make sure you’re using a version of <code class="docutils literal notranslate"><span class="pre">kings.py</span></code> that still contains Mike’s error.</p>
+<p><strong>Step 1.</strong> Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">kings.py</span></code> and answer no to the first two questions. Despite the fact that you know there’s a problem, <code class="docutils literal notranslate"><span class="pre">count_points</span></code> doesn’t throw a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> as it did in ALE 15.1. Instead, it shows your hand and the top of the discard pile. But the hand doesn’t look right, does it?</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">s</span></code> (that says you want the top card of the stock pile), and the program continues to run. You can even discard a card (as long as its a valid rank).</p>
+<p>Yuk. This is an example of a runtime bug that doesn’t cause the program to exit from an exception.</p>
+<p><strong>Step 2.</strong> Think about how you would use <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> to start debugging this version of <code class="docutils literal notranslate"><span class="pre">kings.py</span></code>. What line would you tell <code class="docutils literal notranslate"><span class="pre">repl32.py</span></code> when prompted? Why would you choose that line as the place to start checking the values of the script’s variables?</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -386,6 +422,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-15-1-bug-hunting-with-repl32-py">ALE 15.1: Bug hunting with repl32.py</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-15-2-bug-hunting-revisited">ALE 15.2: Bug hunting revisited</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
