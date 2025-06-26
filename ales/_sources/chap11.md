@@ -246,4 +246,30 @@ for attribute in dir(cosmo):
 
 You should now have a better idea of what it means when a child class inherits attributes and methods of its parent class.
 
-\[Version 20250327\]
+## ALE 11.8: The Monty Hall problem
+
+This classic brain teaser is often used to illustrate the vexing nature of conditional probabilities and the power of Bayes's theorem. Here's [the problem as asked by Craig F. Whitaker to Marilyn vos Savant through a letter originally published in a 1990 issue of PARADE magazine](https://web.archive.org/web/20130121183432/http://marilynvossavant.com/game-show-problem/):
+
+> Suppose you’re on a game show, and you’re given the choice of three doors. Behind one door is a car, behind the others, goats. You pick a door, say #1, and the host, who knows what’s behind the doors, opens another door, say #3, which has a goat. He says to you, "Do you want to pick door #2?" Is it to your advantage to switch your choice of doors?
+
+**Step 1.** Take a moment and decide whether you'd stay with door #1 or switch to door #2. Sketch out the logic of your decision.
+
+**Step 2.** My first reaction, like many people's, is to focus on the two remaining doors and the fact that behind one of them is the car. Two doors, one car and one goat, 50-50 chance to pick the door hiding the car, right? I might as well stay with my original pick: door #1.
+
+Unfortunately, that's the probabilistically poor choice. As we'll understand through the next two steps, we should change our choice as the other unopened door will hide the car twice as often. Step 3 will get you to focus on the important part of the problem, and then in Step 4, you'll write a simulation that estimates the probabilities.
+
+**Step 3.** I found it surprisingly hard to write this simulation. It's not hard to get it to generate thousands of trials of this problem, which is code I'll give you. What's hard is understanding what you should do with each of the randomly generated trials, and so first, I'll attempt to cement in your mind what matters in this problem. In particular, it isn't what I focused on as I described my initial reaction in Step 2. What you should focus on is the work the host does, which is lightly touched in the original problem statement.
+
+Consider this restatement of the problem:
+
+> Suppose you're on a game show, and Monty Hall, the host, gives you the choice of three doors. He tells you that behind one door is a car, behind the others, goats. The car and the goats have been randomly placed behind these doors. You (again) pick door #1.
+>
+> Hall clears his throat and says, "Excuse me while I peek behind door #3. If there's a goat there, I'll show it to you. But if the car is there, I'll show you what's behind door #2, which I'll know must be a goat if the car is behind door #3. By following this simple algorithm and gaining a bit of insider information, I'll always show you a goat, right?" After thinking about it, you nod.
+>
+> With your attention now squarely on what Hall is going to do, he grabs your shoulder, looks you in the eye, and asks, "What was the probability of a car being behind door #1 when you chose one of three doors? Will the work I do to find a goat to show you change the probability of the car being behind door #1?" You pause and think, and then you shake your head no.
+>
+> Hall turns and opens door #3, which has a goat. He says to you, "Do you want to pick door #2?"
+
+**Step 4.** The restatement in the prior step provides you with what you need to know to write a script that simulates many trials of the Monty Hall problem. In `ale08.py`, I've started writing the script for you. You need to replace line 28 with your code that performs Monty Hall's algorithm and updates the variable `wins`. When you've done it correctly, door #1 will win (i.e., hide the car) about one-third of the time.
+
+\[Version 20250626\]

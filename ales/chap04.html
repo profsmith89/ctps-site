@@ -326,6 +326,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-3-but-it-must-be-true">ALE 4.3: But it must be true!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-4-a-mashup">ALE 4.4: A Mashup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-5-json-makes-my-eyes-ache">ALE 4.5: JSON makes my eyes ache</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-6-comparing-python-s-collection-types">ALE 4.6: Comparing Python’s collection types</a></li>
 </ul>
             </nav>
         </div>
@@ -595,7 +596,120 @@ document.write(`
 </ul>
 <p><strong>Step 3.</strong> Add another block of statements that prints the type of resource (i.e., the item is a text or a still image).</p>
 <p><strong>Step 4.</strong> If the resource is a text and the item includes an abstract, print it. The abstract for <em>The Cat in the Hat</em> is “Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games.”</p>
-<p>[Version 20250217]</p>
+</section>
+<section id="ale-4-6-comparing-python-s-collection-types">
+<h2>ALE 4.6: Comparing Python’s collection types<a class="headerlink" href="#ale-4-6-comparing-python-s-collection-types" title="Permalink to this heading">#</a></h2>
+<p>You’ve played with two of the three Python built-in types for holding collections of data: <code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code>. The third of these types is <code class="docutils literal notranslate"><span class="pre">set</span></code>, which is an unordered collection of unique and immutable objects. Like a mathematical set, a Python <code class="docutils literal notranslate"><span class="pre">set</span></code> does not allow duplicate elements. Duplicates are allowed in <code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> objects.</p>
+<p>It’s sometimes hard to keep the features of these three types straight in your mind. This exercise is meant to help.</p>
+<p><strong>Step 1.</strong> The following are examples of a Python <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span></code>, and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> objects. Each contains the same elements, and Python knows which collection type to create by the kind of bracket you use to surround the comma-separate elements.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">a_list</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">a_set</span> <span class="o">=</span>   <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
+<span class="linenos">5</span><span class="n">a_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 2.</strong> All three of these collection types are <em>iterable</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 5</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">iterate_me</span><span class="p">(</span><span class="n">a_collection</span><span class="p">):</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">a_collection</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="nb">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1"># All are iterable</span>
+<span class="linenos">12</span><span class="n">iterate_me</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">iterate_me</span><span class="p">(</span><span class="n">a_set</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">iterate_me</span><span class="p">(</span><span class="n">a_tuple</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 3.</strong> All three allow for counting their length using the built-in <code class="docutils literal notranslate"><span class="pre">len</span></code> function and membership testing using the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">14</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># All allow for membership testing</span>
+<span class="linenos">17</span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">)</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">a_set</span><span class="p">)</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">a_tuple</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 4.</strong> Two of the three are <em>ordered</em>. Only ordered types allow you to perform indexing and slicing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Lists and tuples are ordered and indexable</span>
+<span class="linenos">22</span><span class="nb">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">23</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">24</span>    <span class="nb">print</span><span class="p">(</span><span class="n">a_set</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># not legal Python</span>
+<span class="linenos">25</span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">26</span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 5.</strong> Two of the three are <em>mutable</em> types, meaning that you can change the elements of the collection type after it has been created. The method name you use to change the object depends on the object type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">26</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="c1"># Lists and sets are mutable</span>
+<span class="linenos">29</span><span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="linenos">30</span><span class="nb">print</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">a_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="linenos">32</span><span class="nb">print</span><span class="p">(</span><span class="n">a_set</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Step 6.</strong> While you can add and remove a set’s elements, which makes the set itself mutable, you cannot store mutable objects in a set. This has to do with the implementation of this type. Technically, a <code class="docutils literal notranslate"><span class="pre">set</span></code> element must be <em>hashable</em>, which is a topic we’ll cover in Chapter 10.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">32</span><span class="c1">### chap04/ale06.py</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="c1"># Set elements cannot be mutable objects</span>
+<span class="linenos">35</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">36</span>    <span class="n">a_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a_list</span><span class="p">)</span>
+<span class="linenos">37</span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="linenos">38</span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Summary</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Syntax</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Duplicates</p></td>
+<td><p>✅ Allowed</p></td>
+<td><p>❌ Not allowed</p></td>
+<td><p>✅ Allowed</p></td>
+</tr>
+<tr class="row-even"><td><p>Iterable</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ordered</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>❌ No</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Indexable</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>❌ No</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mutable object</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>❌ No.</p></td>
+</tr>
+<tr class="row-even"><td><p>Mutable elements</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>❌ No.</p></td>
+<td><p>✅ Yes</p></td>
+</tr>
+</tbody>
+</table>
+<p>[Version 20250626]</p>
 </section>
 </section>
 
@@ -671,6 +785,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-3-but-it-must-be-true">ALE 4.3: But it must be true!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-4-a-mashup">ALE 4.4: A Mashup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-5-json-makes-my-eyes-ache">ALE 4.5: JSON makes my eyes ache</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-4-6-comparing-python-s-collection-types">ALE 4.6: Comparing Python’s collection types</a></li>
 </ul>
   </nav></div>
 

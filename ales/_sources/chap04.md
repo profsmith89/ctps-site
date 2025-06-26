@@ -348,4 +348,113 @@ In `ale05.py`, add statements below line 55 so that the loop on line 44 prints t
 
 **Step 4.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
 
-\[Version 20250217\]
+## ALE 4.6: Comparing Python's collection types
+
+You've played with two of the three Python built-in types for holding collections of data: `list` and `tuple`. The third of these types is `set`, which is an unordered collection of unique and immutable objects. Like a mathematical set, a Python `set` does not allow duplicate elements. Duplicates are allowed in `list` and `tuple` objects.
+
+It's sometimes hard to keep the features of these three types straight in your mind. This exercise is meant to help.
+
+**Step 1.** The following are examples of a Python `list`, `set`, and `tuple` objects. Each contains the same elements, and Python knows which collection type to create by the kind of bracket you use to surround the comma-separate elements.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap04/ale06.py
+
+a_list =  [1, 2, 'c']
+a_set =   {1, 2, 'c'}
+a_tuple = (1, 2, 'c')
+```
+
+**Step 2.** All three of these collection types are _iterable_.
+
+```{code-block} python
+---
+lineno-start: 5
+---
+### chap04/ale06.py
+
+def iterate_me(a_collection):
+    for elem in a_collection:
+        print(elem)
+
+# All are iterable
+iterate_me(a_list)
+iterate_me(a_set)
+iterate_me(a_tuple)
+```
+
+**Step 3.** All three allow for counting their length using the built-in `len` function and membership testing using the `in` keyword.
+
+```{code-block} python
+---
+lineno-start: 14
+---
+### chap04/ale06.py
+
+# All allow for membership testing
+print(2 in a_list)
+print(2 in a_set)
+print(2 in a_tuple)
+```
+
+**Step 4.** Two of the three are _ordered_. Only ordered types allow you to perform indexing and slicing.
+
+```{code-block} python
+---
+lineno-start: 19
+---
+### chap04/ale06.py
+
+# Lists and tuples are ordered and indexable
+print(a_list[1], a_tuple[1])
+try:
+    print(a_set[1])    # not legal Python
+except TypeError as e:
+    print(e)
+```
+
+**Step 5.** Two of the three are _mutable_ types, meaning that you can change the elements of the collection type after it has been created. The method name you use to change the object depends on the object type.
+
+```{code-block} python
+---
+lineno-start: 26
+---
+### chap04/ale06.py
+
+# Lists and sets are mutable
+a_list.append('d')
+print(a_list)
+a_set.add('d')
+print(a_set)
+```
+
+**Step 6.** While you can add and remove a set's elements, which makes the set itself mutable, you cannot store mutable objects in a set. This has to do with the implementation of this type. Technically, a `set` element must be _hashable_, which is a topic we'll cover in Chapter 10.
+
+```{code-block} python
+---
+lineno-start: 32
+---
+### chap04/ale06.py
+
+# Set elements cannot be mutable objects
+try:
+    a_set.add(a_list)
+except TypeError as e:
+    print(e)
+```
+
+**Summary**
+
+| Feature          | `list`       | `set`           | `tuple`      |
+| ---------------- | ------------ | --------------- | ------------ |
+| Syntax           | `[1, 2, 3]`  | `{1, 2, 3}`     | `(1, 2, 3)`  |
+| Duplicates       | ✅ Allowed   | ❌ Not allowed  | ✅ Allowed   |
+| Iterable         | ✅ Yes       | ✅ Yes          | ✅ Yes       |
+| Ordered          | ✅ Yes       | ❌ No           | ✅ Yes       |
+| Indexable        | ✅ Yes       | ❌ No           | ✅ Yes       |
+| Mutable object   | ✅ Yes       | ✅ Yes          | ❌ No.       |
+| Mutable elements | ✅ Yes       | ❌ No.          | ✅ Yes       |
+
+\[Version 20250626\]
