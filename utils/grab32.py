@@ -75,11 +75,11 @@ SETUP_REPO = 'template'
 # a shareable Google Drive URL is here:
 # https://drive.google.com/file/d/FILE_ID/view?usp=sharing
 PSETS = {
-    'pset1': '1CQWXhfdR5TYECfWRRnXzDEJxhEzdqx4m',
-    'pset2': '1RXwyEuSp-nomfzvtv28cSO9KQZZT8TCa',
-    'pset3': '17SEp67vLgMytPuyuHNNnZxF5pPRYctVV',
-    'pset4': '1-oOHOW9m7RGyuVUmRM-LyLrFnDUtZEEM',
-    'pset5': '1jYYeNKa6fAdtnQ4kiIUSCj-j8U7SLSmP',
+    'pset1': '17jx0YjyoKPbaLsfaPsuFrKjpZm05tfDc',
+    'pset2': '1ylmOx0gNM0MdJWFB0AjQVKaJWPnZUpOs',
+    'pset3': '159p2NGDOKk2DZQY-mKuFO1BJNJY_c8jd',
+    'pset4': '13RA2Hyfh0P-py813vksalwoTsl-CrZ6j',
+    'pset5': '1MuRp9DtuKG7MWlrLX4HMWd3kHG4WHSn2',
 }
 
 
