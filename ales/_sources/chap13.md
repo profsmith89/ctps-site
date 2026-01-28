@@ -18,7 +18,7 @@ def get_wordlist(line):
             for w in line.split()]
 ```
 
-**Step 1.** We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you understand its operation, and if not, review our earlier work with `str.replace`.
+**Step 1.** We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you should understand its operation, and if not, review our earlier work with `str.replace`.
 
 **Step 2.** Line 22, which continues on line 23, is where the interesting stuff happens. To understand this statement, first recognize that the outermost square brackets define a *Python list comprehension*, which is a shorthand for creating a new list from the values in an existing list. The "existing list" comes from a straightforward `str.split` of the input line, which removes whitespace but leaves "words" like `'best!"'`, which you'll see if you run the next code block.
 
@@ -87,24 +87,4 @@ line = 'And Mrs. Smith said, "I\'m the best!"'
 get_wordlist(line)
 ```
 
-## ALE 13.2: Grabbing a piece of a path
-
-The function `get_fname` in Chapter 13 takes a full pathname like `/home/runner/chap13/test.py` and returns just the filename at the end of it (i.e., `test.py`). It does its work using the regular expression `\w+\.py$`.
-
-We can break down this regular expression and understand that it searches for a match that is one or more "word" characters (`\w+`) followed by a literal period (`\.`) and then the characters `py`. In other words, it finds things in a full pathname that look like filenames for Python scripts. However, the regular expression ends with a dollar sign (`$`), which means that the pattern it matches must occur at the end of the full pathname. Any matches of `\w+\.py` not occuring at the end of the pathname are ignored (i.e., they are not matches).
-
-**Step 1.** Look at the code in `ale02.py`. The `main` function defines a list of full pathname strings, and then it runs three tests on the strings in this list. The first test is the same regular expression used in `get_fname`; it matches a Python-script-like name if one occurs at the end of the full pathname. The actual application of the regular expression and the printing of the result is done in the function `print_part`.
-
-Run `python3 ale02.py` and make sure you understand when a full pathname produces a filename and when it fails to do so. You're just looking at the output between `## TEST 1 ##` and `## TEST 2 ##` right now.
-
-**Step 2.** The second test changes the regular expression. This expression says that it wants `print_part` to also print the folder containing the Python-script-like name if that folder is called `chap13`.
-
-Again, run `ale02.py` and make sure you understand what's printed between `## TEST 2 ##` and `## TEST 3 ##`.
-
-**Step 3.** Can you define `re3` so that it matches not a specific folder name, but any simple folder name? The first five strings and the seventh in `fullpaths` are what I'd call simple folder names; they use only characters in the shorthand `\w`. Remember, we still want to match only filenames that look like Python scripts!
-
-Your regular expression should produce a match for the full pathname strings at indices 0-2 and 5-6 in `fullpaths`, but the match produced by `fullpaths[5]` will be `py/test.py` and not `test.py/test.py`.
-
-**Step 4. (EXTRA CREDIT)** Can you define `re3` so that it produces `test.py/test.py` for `fullpath[5]` while not changing the printed output for the first three and the seventh `fullpaths` strings?
-
-\[Version 20250408\]
+\[Version 20241204\]

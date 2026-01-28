@@ -86,7 +86,7 @@ We will learn more about the infix `+` operator in Chapter 2, but briefly, it pe
 
 Update the script in your editor pane so that it matches the code above. Make sure the `txts` subdirectory exists in your IDE file browser and then try running this script.
 
-**Step 2.** Now add the statement on line to the end of your script, as illustrated in the following code:
+**Step 2.** Now add the statement on line 13 to the end of your script, as illustrated in the following code:
 
 ```{code-block} python
 ---

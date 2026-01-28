@@ -161,7 +161,7 @@ assert(the_sky == 'is blue')
 print('It must be because execution got here!')
 ```
 
-**Step 2.** Be careful with your parentheses in this statement.  `assert` is **not** a command, but a kind of Python statement. We can rewrite the code block above in the following ways:
+**Step 2.** Be careful with your parentheses in this statement.  `assert` is **not** a command, but a kind of Python statement. We can rewrite the code block above in the follow ways:
 
 ```{code-block} python
 ---
@@ -326,135 +326,64 @@ Don't ever write your private information as a literal in the scripts you develo
 
 ## ALE 4.5: JSON makes my eyes ache
 
-The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response (after dumping out the entire JSON response).
+The `qweb7.py` script illustrated how we can pull apart a response from Harvard's LibraryCloud API and determine if the Harvard Library system has a copy of *The Cat in the Hat* by Dr. Seuss. But this script printed only the titles of each resource in the response.
 
-This exercise asks you to pull other types of information from the JSON response, which will give you practice with Python dictionaries and lists and indexing into them.
+I've copied `qweb7.py` below, except that it asks for the top 4 results. See if you can extend the code in the following ways. Each will require you to read through the dumped JSON response and figure out the sequence of indexing operations you need to do to access the information you need to print. Be careful as some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field.
 
-**Step 1.** You'll start with a practice on indexing through a hierarchy of Python dictionaries and lists.
-
-*   Look at `ale05.py` and `ale05_step1.py`. `ale05.py` is mostly a copy of `qweb7.py`, except that it imports `ale05_step1.py` and checks on line 29 whether you're working on this step or a later one. You'll also notice that there are comments starting on line 55 that show you where to put your answers to this step and the subsequent ones.
-
-*   `ale05_step1.py` exists to define a fake response from HOLLIS. It doesn't contain the full complexity of a HOLLIS response and lets you focus on indexing into dictionaries of lists and sub-dictionaries. The `main` routine in this module runs a simple test that indexes into a dictionary that is contained in another dictionary.
-
-In `ale05.py`, add statements below line 55 so that the loop on line 44 prints the author information (if any) for each title in the response.
-
-**Step 2.** The first step eliminates a piece of complexity in a real HOLLIS response: some JSON fields may be a Python dictionary in one item and a Python list in another, as our code illustrated with the `'titleInfo'` field (lines 45-49). In this step, you'll handle this complexity for grabbing author information.
-
-*   First, change the variable `STEP1` on line 8 to `False` and comment out your solution to Step 1.
-
-*   After the comment that says "STEP 2", write the general solution to printing the author information.
-
-**Step 3.** Add another block of statements that prints the type of resource (i.e., the item is a text or a still image).
-
-**Step 4.** If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
-
-## ALE 4.6: Comparing Python's collection types
-
-You've played with two of the three Python built-in types for holding collections of data: `list` and `tuple`. The third of these types is `set`, which is an unordered collection of unique and immutable objects. Like a mathematical set, a Python `set` does not allow duplicate elements. Duplicates are allowed in `list` and `tuple` objects.
-
-It's sometimes hard to keep the features of these three types straight in your mind. This exercise is meant to help.
-
-**Step 1.** The following are examples of a Python `list`, `set`, and `tuple` objects. Each contains the same elements, and Python knows which collection type to create by the kind of bracket you use to surround the comma-separate elements.
+1. Print the author's name.
+2. Print the type of resource (i.e., the item is a text or a still image).
+3. If the resource is a text and the item includes an abstract, print it. The abstract for *The Cat in the Hat* is "Two children sitting at home on a rainy day are visited by the Cat in the Hat who shows them some tricks and games."
 
 ```{code-block} python
 ---
 lineno-start: 1
 ---
-### chap04/ale06.py
+### chap04/qweb7.py
+import requests
+import json
 
-a_list =  [1, 2, 'c']
-a_set =   {1, 2, 'c'}
-a_tuple = (1, 2, 'c')
+def main():
+    print('Searching HOLLIS for "The Cat in the Hat"')
+
+    # Concatenate the first 3 components of a URL for HTTP
+    protocol = 'https'
+    hostname = 'api.lib.harvard.edu'
+    path = '/v2/items.json'
+    url = protocol + '://' + hostname + path
+
+    # Describe the query string as a Python dictionary
+    query = {'q': 'The Cat in the Hat',
+             'limit': 4
+    }
+
+    # Add a field to the request header saying what we accept
+    accept = {'Accept': 'application/json'}
+
+    response = requests.get(url, params=query, headers=accept)
+
+    # Read the response body in JSON format and print it
+    j = response.json()
+    print("response.json() =", json.dumps(j, indent=4))
+
+    print()
+
+    if j['pagination']['numFound'] == 0:
+        print('Zero results')
+    else:
+        # Process each returned response
+        for i, item in enumerate(j['items']['mods']):
+            # Print title info
+            ti = item['titleInfo']
+            if type(ti) == list:
+                # Lots of title info; just print the first
+                ti = ti[0]
+            print(f"Title #{i}: ", end='')
+            if 'nonSort' in ti:
+                print(ti['nonSort'], end='')
+            print(ti['title'])
+
+if __name__ == '__main__':
+    main()
 ```
 
-**Step 2.** All three of these collection types are _iterable_.
-
-```{code-block} python
----
-lineno-start: 5
----
-### chap04/ale06.py
-
-def iterate_me(a_collection):
-    for elem in a_collection:
-        print(elem)
-
-# All are iterable
-iterate_me(a_list)
-iterate_me(a_set)
-iterate_me(a_tuple)
-```
-
-**Step 3.** All three allow for counting their length using the built-in `len` function and membership testing using the `in` keyword.
-
-```{code-block} python
----
-lineno-start: 14
----
-### chap04/ale06.py
-
-# All allow for membership testing
-print(2 in a_list)
-print(2 in a_set)
-print(2 in a_tuple)
-```
-
-**Step 4.** Two of the three are _ordered_. Only ordered types allow you to perform indexing and slicing.
-
-```{code-block} python
----
-lineno-start: 19
----
-### chap04/ale06.py
-
-# Lists and tuples are ordered and indexable
-print(a_list[1], a_tuple[1])
-try:
-    print(a_set[1])    # not legal Python
-except TypeError as e:
-    print(e)
-```
-
-**Step 5.** Two of the three are _mutable_ types, meaning that you can change the elements of the collection type after it has been created. The method name you use to change the object depends on the object type.
-
-```{code-block} python
----
-lineno-start: 26
----
-### chap04/ale06.py
-
-# Lists and sets are mutable
-a_list.append('d')
-print(a_list)
-a_set.add('d')
-print(a_set)
-```
-
-**Step 6.** While you can add and remove a set's elements, which makes the set itself mutable, you cannot store mutable objects in a set. This has to do with the implementation of this type. Technically, a `set` element must be _hashable_, which is a topic we'll cover in Chapter 10.
-
-```{code-block} python
----
-lineno-start: 32
----
-### chap04/ale06.py
-
-# Set elements cannot be mutable objects
-try:
-    a_set.add(a_list)
-except TypeError as e:
-    print(e)
-```
-
-**Summary**
-
-| Feature          | `list`       | `set`           | `tuple`      |
-| ---------------- | ------------ | --------------- | ------------ |
-| Syntax           | `[1, 2, 3]`  | `{1, 2, 3}`     | `(1, 2, 3)`  |
-| Duplicates       | ✅ Allowed   | ❌ Not allowed  | ✅ Allowed   |
-| Iterable         | ✅ Yes       | ✅ Yes          | ✅ Yes       |
-| Ordered          | ✅ Yes       | ❌ No           | ✅ Yes       |
-| Indexable        | ✅ Yes       | ❌ No           | ✅ Yes       |
-| Mutable object   | ✅ Yes       | ✅ Yes          | ❌ No.       |
-| Mutable elements | ✅ Yes       | ❌ No.          | ✅ Yes       |
-
-\[Version 20250626\]
+\[Version 20241204\]

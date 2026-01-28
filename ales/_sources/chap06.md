@@ -35,7 +35,7 @@ from PIL import Image
 sz = (100, 100)
 
 # Create a single plane of black and white pixels, initialized to black
-im = Image.new('RGB', sz)
+im = Image.new('L', sz)
 
 # Create direct access to the pixels in the image
 pixels = im.load()
