@@ -333,7 +333,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
@@ -342,6 +342,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-a-street-address">ALE 3.11: Coarsening a street address</a></li>
 </ul>
             </nav>
         </div>
@@ -395,7 +396,7 @@
 <p><strong>Step 4.</strong> Create a code block that tests your <code class="docutils literal notranslate"><span class="pre">find_w</span></code> function.</p>
 </section>
 <section id="ale-3-2-getting-comfortable-with-range">
-<h2>ALE 3.2: Getting comfortable with `range`<a class="headerlink" href="#ale-3-2-getting-comfortable-with-range" title="Link to this heading">#</a></h2>
+<h2>ALE 3.2: Getting comfortable with <code class="docutils literal notranslate"><span class="pre">range</span></code><a class="headerlink" href="#ale-3-2-getting-comfortable-with-range" title="Link to this heading">#</a></h2>
 <p>What is that <code class="docutils literal notranslate"><span class="pre">range</span></code> command? We discussed it as a function that produces an integer sequence whose length is its input parameter. Used in a for-loop, the loop can then assign each element of the generated sequence to its loop variable (e.g., variable <code class="docutils literal notranslate"><span class="pre">i</span></code> in the example below) and execute the loop body for each element.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -403,7 +404,7 @@
 </div>
 <p>Questions:</p>
 <ol class="arabic simple">
-<li><p>What is the first number printed? Why is that the default for the first value produced by `range`? What does it make easy? There is a way to specify the starting value of the range produced. Can you figure out how to change the starting value?</p></li>
+<li><p>What is the first number printed? Why is that the default for the first value produced by <code class="docutils literal notranslate"><span class="pre">range</span></code>? What does it make easy? There is a way to specify the starting value of the range produced. Can you figure out how to change the starting value?</p></li>
 <li><p>What is the difference between our input value to <code class="docutils literal notranslate"><span class="pre">range</span></code> and the final number printed? Why is this? When you change the starting value, what is the final value printed? What does the single parameter to <code class="docutils literal notranslate"><span class="pre">range</span></code> represent if it isn’t the final value printed?</p></li>
 </ol>
 <p>Feel free to change the code block above as you answer these questions!</p>
@@ -727,7 +728,25 @@
 </div>
 <p>Try changing line 14 in <code class="docutils literal notranslate"><span class="pre">bookshelf1.py</span></code> and then run it. This script’s <code class="docutils literal notranslate"><span class="pre">main</span></code> function calls <code class="docutils literal notranslate"><span class="pre">my_replace</span></code> with both strings and lists, and it will fail to complete successfully.</p>
 <p>The takeaway lesson is: If you want an object that is the item in a sequence, use indexing. If you want an object that is of the same type as the sequence, use slicing.</p>
-<p>[Version 20241204]</p>
+</section>
+<section id="ale-3-11-coarsening-a-street-address">
+<h2>ALE 3.11: Coarsening a street address<a class="headerlink" href="#ale-3-11-coarsening-a-street-address" title="Link to this heading">#</a></h2>
+<p>States and the U.S. federal governments regularly collect sensitive information about citizens and foreign nationals. Many of the agencies that hold these data are required by law to make publicly available what they’ve collected. They are also required to protect the privacy of the individuals in the data. Unfortunately, making data useful and privacy-preserving is a hard problem.</p>
+<p>Let’s take a look at one such public data set: <a class="reference external" href="https://data.cambridgema.gov/Public-Safety/Tow-Log/aa6j-h24p/about_data">the City of Cambridge Tow Log</a>, which contains information about the vehicles towed within the city limits of Cambridge, MA. Feel free to click the “Export” button, download the data set as a CSV file, and open it, which you can do with practically any spreadsheet program (or later, as we’ll learn, using a Python CSV-compatible library).</p>
+<p>The data set contains information about the vehicle towed (e.g., its make, model, color, year, and state of registry). It also contains information about the general location of where the towing took place. I say “general location” because the log “coarsens” this information so that you can’t tell exactly where a car with these characteristics was found and, presumably, make it harder to figure out whose car was towed.</p>
+<blockquote>
+<div><p>For example, instead of recording that a car was towed from in front of 119 Reed St in Cambridge, the log reports the location as “1XX Reed St”. And instead of listing 6 Emmons Pl, it contains “0XX Emmons Pl”.</p>
+</div></blockquote>
+<p><strong>Your task</strong> is to write the body of a function called <code class="docutils literal notranslate"><span class="pre">coarsen</span></code> (in the <code class="docutils literal notranslate"><span class="pre">chap03/ale11.py</span></code> starter code) that takes a complete street address and returns a coarsened street address like the ones that you see in the Tow Log.</p>
+<p>And because tow-truck drivers are more interested in towing vehicles than recording information they figure no one will ever read, your function should also deal with <strong>random amounts of whitespace (i.e., spaces and tabs)</strong> at the start and end of your function’s input parameter.</p>
+<p>Some things to know that may help:</p>
+<ul class="simple">
+<li><p>The main routine in the starter code in <code class="docutils literal notranslate"><span class="pre">chap03/ale11.py</span></code> will test your function and tell you whether it passes tests of increasing difficulty. You don’t have to touch the <code class="docutils literal notranslate"><span class="pre">main</span></code> routine.</p></li>
+<li><p>Some of the work you need to do is easily accomplished by the Python function <code class="docutils literal notranslate"><span class="pre">str.strip</span></code> in its default mode (i.e., with no input parameter), which you should read about using online resources.</p></li>
+<li><p>You might also consider using <code class="docutils literal notranslate"><span class="pre">str.lstrip</span></code> with a set of characters that would remove the part of the address you have to coarsen. With some simple arithmetic and slicing, you can grab the house number that you have to coarsen, coarsen it, and finally re-attach it to the street name.</p></li>
+</ul>
+<p>When you’re done, you’ll have accomplished a non-trivial string manipulation task. Congratulations!</p>
+<p>[Version 20250122]</p>
 </section>
 </section>
 
@@ -797,7 +816,7 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-1-two-kinds-of-loops">ALE 3.1: Two kinds of loops</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with `range`</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-2-getting-comfortable-with-range">ALE 3.2: Getting comfortable with <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-3-return-with-something">ALE 3.3: Return with something</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-4-visualize-a-function-call">ALE 3.4: Visualize a function call</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-5-two-different-sequences">ALE 3.5: Two different sequences</a></li>
@@ -806,6 +825,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-8-scope-and-the-danger-of-globals">ALE 3.8: Scope and the Danger of Globals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-9-slicing-with-bad-indices">ALE 3.9: Slicing with bad indices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-10-concatenating-lists-or-slicing-produces-sequences">ALE 3.10: Concatenating lists (or slicing produces sequences)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-3-11-coarsening-a-street-address">ALE 3.11: Coarsening a street address</a></li>
 </ul>
   </nav></div>
 

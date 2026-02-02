@@ -221,6 +221,50 @@ if __name__ == '__main__':
 
 Notice that I've named the different escape sequences with a descriptive name. To turn on the printing of text in red, you simply print the `red` escape sequence. To turn off printing text in red, you need to insert the escape sequence of a different color or use the return-to-default-color escape sequence, which I've named `default`. I've printed the capitalized name of the game in our three different colors as an example.
 
-**Step 3.** Start `ale04-server.py` by making a copy of the `guess-server.py` script developed in the chapter. Adapt `ale04-client.py` (above) and `ale04-server.py` so that they play this enhanced guess-the-number game.
+**Step 3.** Adapt `ale04-client.py` and `ale04-server.py` so that they play the enhanced guess-the-number game.
 
-\[Version 20241204\]
+## ALE 5.5: Abstraction and design
+
+You've grappled with the slippery topic of abstraction through the book's first chapters and seen numerous examples of it. Abstraction hides the details necessary for the computer to perform our intended action, but which simultaneously distract us humans from a computation's big picture. In general, we humans find it easier to think about the intended action in the abstract without all the details.
+
+However, even after you've decided where to place an abstraction barrier (i.e., the barrier that hides a solution's details), you'll be confronted with the choice of exactly how to design the abstraction. Recall Chapter 3's example of a procedural abstraction for exponentiation where we asked if we should create separate `square` and `cube` functions, each taking a single input parameter, or a single `power` function taking two parameters. Or should we, as the Python standard library provides, create a single `power` function that takes at least two and sometimes three parameters?
+
+In this exercise, you'll practice thinking through these sorts of choices in the context of a completely different problem. This exercise asks you to do design, not implementation. You'll think about the problem, decide on some primitives (which will define your abstraction barrier), and what the interface to those primitives might look like (i.e., what the `def` line of a function for your primitive might look like).
+
+**A new problem.** Consider the passing of messages between two different programs, one written by you and the other written by a friend. In particular, your program needs to send a message (i.e., a line of text) to your friend's program. Don't worry about how your friend's program will receive this message; just think about the sending of this message.
+
+Sounds simple, right? You've probably thought, "I'll just define a function called `send`." Great, here's the beginning of that function's definition:
+
+`def send(...`
+
+**Step 1.** The function is named but what input parameters do you want to include? What capabilities do you want this new function to support?
+
+To answer these questions, think about sending a physical letter (yes, we know, old school). There are actually several ways to send a letter at a U.S. Post Office:
+
+1.  The easiest approach is to prepare your letter, drop it in a mailbox, and forget about it.
+
+2.  Alternatively, you can buy insurance against loss of or damage to your letter in transit, which pays you cash in the event of such an occurrence.
+
+3.  As a separate consideration, you may care about how fast your letter travels to its destination, and in this case, you might also mark the letter as priority mail.
+
+4.  Finally, you may wish to have proof that you mailed the letter when you said you did or that it was successfully delivered.
+
+5.  Or you might want some combination of items 2-4.
+
+Decide which of these types of features you want to support in your `send` function.
+
+**Step 2.** Now that you know which features (if any) you want to support, you next need to think about how a user of your send functionality will express which of these features are important at each `send` call.
+
+1.  Do you want a single function that requires a user to specify all these options, even if some are given a default value (and if so, what is each default value)?
+
+2.  Or do you want a couple of variants of our abstract send? For example, you might create a simple `send` function that operates like dropping your letter in the mailbox and forgetting about it (possibly with or without insurance), and another `send_certified` function that provides you with a return value, which represents the proof you desire.
+
+There is no right answer here. With a friend, talk through these two design choices and answer the following questions:
+
+*   Within what contexts might you might prefer one design over the other?
+
+*   What are you making easy in each approach? What are you making more difficult? 
+
+As you discuss these questions and your personal choices, listen especially to the places where you and your friend disagree. Understanding and appreciating these differences is how you will grow as a designer.
+
+\[Version 20250211\]

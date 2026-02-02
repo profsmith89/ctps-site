@@ -35,7 +35,7 @@ from PIL import Image
 sz = (100, 100)
 
 # Create a single plane of black and white pixels, initialized to black
-im = Image.new('L', sz)
+im = Image.new('RGB', sz)
 
 # Create direct access to the pixels in the image
 pixels = im.load()
@@ -174,7 +174,7 @@ You can let `ale04_double.py` continue to run for a while, but at some point, ki
 
 Our earlier exercises created their own images. In this exercise, you will start learning how to modify an existing digital image. You'll also learn a new set of methods for accessing and changing the value of a particular pixel in your open image.
 
-**Step 1.** In your favorite JPEG viewer, open the color image named `duck.jpg`, which you can find in `chap06/images` of the book's GitHub repo. It should look like a perfectly normal picture that you might have taken with your own cellphone camera.
+**Step 1.** In your favorite JPEG viewer, open the color image named `duck.jpg`, which you can find in `chap06/images`. It should look like a perfectly normal picture that you might have taken with your own cellphone camera.
 
 **Step 2.** The script `ale05.py` uses the Python PIL library to open, read, and recolor a single input image. Read through the script and then we'll briefly discuss what's new in it.
 

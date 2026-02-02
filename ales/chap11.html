@@ -332,11 +332,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of dictionaries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-making-print-work">ALE 11.2: Making print work</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-build-your-own">ALE 11.2: Build your own</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-is-it-better">ALE 11.3: Is it better?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-tbw">ALE 11.5: TBW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-6-an-informed-search">ALE 11.6: An informed search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-7-classes-in-oo-programming">ALE 11.7: Classes in OO programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-8-the-monty-hall-problem">ALE 11.8: The Monty Hall problem</a></li>
 </ul>
             </nav>
         </div>
@@ -351,16 +354,81 @@
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-11">
 <h1>Chapter 11<a class="headerlink" href="#chapter-11" title="Link to this heading">#</a></h1>
 <section id="ale-11-1-dictionary-of-dictionaries">
-<h2>ALE 11.1: Dictionary of dictionaries<a class="headerlink" href="#ale-11-1-dictionary-of-dictionaries" title="Link to this heading">#</a></h2>
-<p>[Insert an edited version of Kitty’s ALE 11.1.]</p>
+<h2>ALE 11.1: Dictionary of Dictionaries<a class="headerlink" href="#ale-11-1-dictionary-of-dictionaries" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin</span></code> described in Chapter 11 defines a data structure for a Google Maps-like pin. With instances of this data type, we were able to mark Cosmo’s favorite places.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Pin</span></code> object records:</p>
+<ul class="simple">
+<li><p>a location (i.e., an x-y tuple of integers)</p></li>
+<li><p>a name for the location (i.e., a string)</p></li>
+<li><p>a short note about the location (i.e., a string)</p></li>
+<li><p>a rating in stars (i.e., an integer)</p></li>
+<li><p>an icon for the map (i.e., a string emoji), which was computed in the class’s constructor code.</p></li>
+</ul>
+<p>In this exercise, we’ll use a dictionary instead of a class as the structure for a <code class="docutils literal notranslate"><span class="pre">Pin</span></code>. We’ll see that this approach isn’t as good as using a class, but it does permit the use of descriptive strings to access the components of a dictionary-based <code class="docutils literal notranslate"><span class="pre">Pin</span></code> similar to the way we used descriptive data attributes in the chapter’s <code class="docutils literal notranslate"><span class="pre">Pin</span></code> class. Let’s see how this dictionary-based approach works out.</p>
+<p>Please complete the following steps in the script <code class="docutils literal notranslate"><span class="pre">chap11/ale01.py</span></code>.</p>
+<p><strong>Step 1.</strong> Look at the start of the function <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> in <code class="docutils literal notranslate"><span class="pre">ale01.py</span></code>, which builds three pins using the Python dictionary data type and duplicates the data attribute values on lines 58-60 of <code class="docutils literal notranslate"><span class="pre">pin.py</span></code>.</p>
+<blockquote>
+<div><p>Insert a few Python statements at the end of the <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> function body so that this function prints just the names of the three pins (i.e., you should print the value of the <code class="docutils literal notranslate"><span class="pre">name</span></code> key). Print the names of the different pins on separate lines.</p>
+</div></blockquote>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">1</span></code>.</p>
+<p><strong>Step 2.</strong> As you undoubtedly noticed, it’s not a great design to choose a name for each pin. If we were to add a new pin, we’d have to change the code in the function <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> to both define <strong>and print</strong> this new pin using its unique name. Many of the tasks we might want to do (beyond printing) would benefit from a data structure that contained our collection of all pins. The script <code class="docutils literal notranslate"><span class="pre">pin.py</span></code> used a Python list for this purpose. Let’s do something different here.</p>
+<p>Let’s store our individual pins in a dictionary, which would create a <em>dictionary of dictionaries</em>. We’ve seen this type of data structure back in Chapter 4, where the JSON file format returned by web requests involved lots of dictionaries nested inside other dictionaries.</p>
+<p>As you start to consider this work, you’ll realize that you have to choose a key for each dictionary that you store in the returned dictionary. What kind of unique identifier should we use for the keys in this “outer” dictionary?</p>
+<p>Arguably, two pins could have the same name. They could also include the same note. Obviously, there are few possible star ratings and many possible pins. None of these seems like good candidates.</p>
+<p>Here are two reasonable but imperfect choices:</p>
+<ol class="arabic simple">
+<li><p>We might use a pin’s location as its key in the outer dictionary. If we restrict each (x,y) location in our map so that it can take only one pin, this approach would work nicely.</p></li>
+<li><p>We might alternatively use strings like “pin1” and “pin2” and so forth. By taking the <code class="docutils literal notranslate"><span class="pre">len</span></code> of this outer dictionary, we would know the next key string to generate when we wanted to add a new pin. Unfortunately, this scheme starts to fall apart when we delete keys from the dictionary. Do you see why?</p></li>
+</ol>
+<p>Let’s go with the first choice.</p>
+<blockquote>
+<div><p>Add a return statement to the end of <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> that returns this dictionary of dictionaries. You’ll notice that the call to <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> in <code class="docutils literal notranslate"><span class="pre">main</span></code> under <code class="docutils literal notranslate"><span class="pre">**</span> <span class="pre">STEP</span> <span class="pre">2**</span></code> sets the name <code class="docutils literal notranslate"><span class="pre">pins</span></code> to the value returned from <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code>.</p>
+</div></blockquote>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">2</span></code>.</p>
+<p><strong>Step 3.</strong> Insert a print-statement that prints the <code class="docutils literal notranslate"><span class="pre">name</span></code> of the pin at location <code class="docutils literal notranslate"><span class="pre">(3,11)</span></code>. This statement goes in <code class="docutils literal notranslate"><span class="pre">main</span></code> where it says <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">STEP</span> <span class="pre">3</span> <span class="pre">SOLUTION</span> <span class="pre">CODE</span> <span class="pre">HERE</span></code>. The name <code class="docutils literal notranslate"><span class="pre">pin1</span></code> is undefined in <code class="docutils literal notranslate"><span class="pre">main</span></code>, and you must start with the name <code class="docutils literal notranslate"><span class="pre">pins</span></code>.</p>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">3</span></code>.</p>
+<p><strong>Step 4.</strong> Insert a loop that prints the locations, names, and ratings of all of the pins in <code class="docutils literal notranslate"><span class="pre">pins</span></code>. You might have it say something interesting for each pin like, “Cosmo rated Cat at (5,3) with 1 star(s).”</p>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">4</span></code>.</p>
+<p><strong>Step 5.</strong> Read about <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#looping-techniques">looping through the items in a Python dictionary using the method <code class="docutils literal notranslate"><span class="pre">items</span></code></a> and rewrite your solution to Step 4 (where it says <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">STEP</span> <span class="pre">5</span> <span class="pre">SOLUTION</span> <span class="pre">CODE</span> <span class="pre">HERE</span></code>).</p>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">5</span></code>.</p>
+<p><strong>Step 6.</strong> On his most recent walk, Cosmo found a bakery at (9,1) that gives out dog treats for free, and rated it 5 stars. Write a line of code that adds this place to <code class="docutils literal notranslate"><span class="pre">pins</span></code>. Do NOT set the key <code class="docutils literal notranslate"><span class="pre">'loc'</span></code> in this new inner dictionary.</p>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ale01.py</span> <span class="pre">6</span></code>, which will use the printing loop from step 5 to show you how you did.</p>
+<p><strong>Step 7.</strong> So far, this seems like a good solution. Why did we have to learn all this crazy syntax for Python classes?</p>
+<p>Well, the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin</span></code> in <code class="docutils literal notranslate"><span class="pre">pin.py</span></code> also defines an instance variable named <code class="docutils literal notranslate"><span class="pre">icon</span></code> that is computed in the <code class="docutils literal notranslate"><span class="pre">Pin.__init__</span></code> method. How would you add this key to each of your inner dictionaries? You’d write a function, which we’ll call <code class="docutils literal notranslate"><span class="pre">set_pin_icon</span></code>.</p>
+<blockquote>
+<div><p>Insert a function body for <code class="docutils literal notranslate"><span class="pre">set_pin_icon</span></code>, which you’ll find between the definition of <code class="docutils literal notranslate"><span class="pre">make_3_pins</span></code> and <code class="docutils literal notranslate"><span class="pre">main</span></code> in <code class="docutils literal notranslate"><span class="pre">ale01.py</span></code>. This function takes one formal parameter, which is a pin to analyze and adds a key called <code class="docutils literal notranslate"><span class="pre">icon</span></code> to it. The value of this key should be <code class="docutils literal notranslate"><span class="pre">green_heart</span></code> if stars is less than or equal to 3 and <code class="docutils literal notranslate"><span class="pre">red_x</span></code> otherwise.</p>
+</div></blockquote>
+<p>Test your solution by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale01.py</span> <span class="pre">7</span></code>.</p>
+<blockquote>
+<div><p>Notice how we’ve just made the code for constructing a valid pin (i.e., one that adheres to the representation invariant for pins) in multiple places in <code class="docutils literal notranslate"><span class="pre">ale01.py</span></code>. This is a maintenance nightmare and one of the primary reasons that many programmers swear by object-oriented techniques and the resulting encapsulation features.</p>
+</div></blockquote>
 </section>
-<section id="ale-11-2-making-print-work">
-<h2>ALE 11.2: Making print work<a class="headerlink" href="#ale-11-2-making-print-work" title="Link to this heading">#</a></h2>
-<p>[Insert an edited version of Kitty’s ALE 11.X titled “How the heck do you print a pin?” This will help the students to understand how they can add methods to an existing class and explain the difference between `__str__` and `__expr__` through a problem-to-be-solved.]</p>
+<section id="ale-11-2-build-your-own">
+<h2>ALE 11.2: Build your own<a class="headerlink" href="#ale-11-2-build-your-own" title="Link to this heading">#</a></h2>
+<p>[Insert a problem that requires the design of a simple class.]</p>
 </section>
-<section id="ale-11-3-more-power-to-the-constructor">
-<h2>ALE 11.3: More power to the constructor<a class="headerlink" href="#ale-11-3-more-power-to-the-constructor" title="Link to this heading">#</a></h2>
-<p>[Insert an edited version of Kitty’s ALE 11.X titled the same as this ALE. Change the task: support more icons by understanding the star rating and something from the note field.]</p>
+<section id="ale-11-3-is-it-better">
+<h2>ALE 11.3: Is it better?<a class="headerlink" href="#ale-11-3-is-it-better" title="Link to this heading">#</a></h2>
+<p>Recall that the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin</span></code> in <code class="docutils literal notranslate"><span class="pre">pin.py</span></code> is a subclass of the Python <code class="docutils literal notranslate"><span class="pre">object</span></code> class. Let’s understand better what that means and how we can do some subclassing and defining of magic methods.</p>
+<p><strong>Step 1.</strong> Open the script <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code> and review the a list of pins created at the start of <code class="docutils literal notranslate"><span class="pre">main</span></code>. The pins in the <code class="docutils literal notranslate"><span class="pre">pins</span></code> list are of type <code class="docutils literal notranslate"><span class="pre">Pin</span></code>.</p>
+<p>As we’re walking Cosmo around our city, we might want to know whether two pins are equivalent (in some fashion) or if one is better than another. Run <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code> in the following fashion:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">1</span></code></p>
+<p>This runs the code under the comment <code class="docutils literal notranslate"><span class="pre">STEP</span> <span class="pre">1</span></code>. From the printout, you’ll that the first and fourth pins are not considered equal, but a pin is equal to itself. OK, this probably makes some sense to you.</p>
+<p><strong>Step 2.</strong> What does the Python interpreter think when we ask whether the first pin is greater than (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) the second? Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">2</span></code>.</p>
+<p>Oh no, we got a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. The interpreter doesn’t know how to compare two pins in this manner.</p>
+<p>This is because we haven’t built functionality in our <code class="docutils literal notranslate"><span class="pre">Pin</span></code> class to handle comparisons using <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Of course, we didn’t build the equality functionality either (look at the definition of <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin</span></code> in <code class="docutils literal notranslate"><span class="pre">pin.py</span></code>), but Python’s <code class="docutils literal notranslate"><span class="pre">object</span></code> class defined some kind of equality test.</p>
+<p><strong>Step 3.</strong> We can, however, implement the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> operator by defining the magic method <code class="docutils literal notranslate"><span class="pre">__gt__</span></code> in our class. Let’s do this in a subclass or <code class="docutils literal notranslate"><span class="pre">Pin</span></code> so that we don’t mess up the nicely working <code class="docutils literal notranslate"><span class="pre">Pin</span></code> class.</p>
+<p>At the top of <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code>, you’ll find a definition for the new <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin2</span></code> that derives from the <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin</span></code> (i.e., because <code class="docutils literal notranslate"><span class="pre">Pin</span></code> is in the parentheses on line 5 of <code class="docutils literal notranslate"><span class="pre">ale03.py</span></code>). The constructor for this class is a bit tricky as it is implemented using default parameters to allow you to create a pin by specifying either:</p>
+<ul class="simple">
+<li><p>all its required data attributes (and in this case it simply calls the <code class="docutils literal notranslate"><span class="pre">Pin</span></code> constructor); or</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">Pin</span></code> object whose data attributes it copies.</p></li>
+</ul>
+<p>After the Step 2 code in <code class="docutils literal notranslate"><span class="pre">main</span></code>, you’ll see both these methods used to create a bunch <code class="docutils literal notranslate"><span class="pre">Pin2</span></code> objects that are copies of the original <code class="docutils literal notranslate"><span class="pre">Pin</span></code> objects.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">3</span></code> to see that these constructor calls worked correctly.</p>
+<p><strong>Step 4.</strong> In the definition of <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin2</span></code>, you’ll see that I defined the magic method <code class="docutils literal notranslate"><span class="pre">__gt__</span></code> that checks to see if the current object’s <code class="docutils literal notranslate"><span class="pre">stars</span></code> rating is greater than the pin that was passed as the <code class="docutils literal notranslate"><span class="pre">pin</span></code> paramter. The current object is to the left-hand side of a <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> sign and the passed parameter to the right-hand side.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">4</span></code> to see this magic method work. No more <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>!</p>
+<p><strong>Step 5.</strong> Your last task in this exercise is to override the <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> magic method in the Python <code class="docutils literal notranslate"><span class="pre">object</span></code> class with the implementation we want for the <code class="docutils literal notranslate"><span class="pre">==</span></code> operator in the <code class="docutils literal notranslate"><span class="pre">Pin2</span></code> class. Specifically, we want <code class="docutils literal notranslate"><span class="pre">==</span></code> to return <code class="docutils literal notranslate"><span class="pre">True</span></code> when a pin’s <code class="docutils literal notranslate"><span class="pre">stars</span></code> rating is equal to another pin’s <code class="docutils literal notranslate"><span class="pre">stars</span></code> rating and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<p>See if you can write a method definition for <code class="docutils literal notranslate"><span class="pre">__eq__</span></code> in <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pin2</span></code>, and test it by running <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale03.py</span> <span class="pre">5</span></code>. HINT: The printout should NOT say false and false.</p>
 </section>
 <section id="ale-11-4-see-the-path">
 <h2>ALE 11.4: See the path<a class="headerlink" href="#ale-11-4-see-the-path" title="Link to this heading">#</a></h2>
@@ -390,10 +458,94 @@
 </div>
 <p>Run your script and take a look at the solution. Do you like the route it found? If not, how might you change your script to have it find and print a more direct route from start to goal?</p>
 </section>
-<section id="ale-11-5-build-your-own-class">
-<h2>ALE 11.5: Build your own class<a class="headerlink" href="#ale-11-5-build-your-own-class" title="Link to this heading">#</a></h2>
-<p>[Insert an edited version of Kitty’s ALE 11.2 titled “Build your own Pin” that has the student build their own class. It would be nice if it tied into the map motif as `Pin` did.]</p>
-<p>[Version 20241204]</p>
+<section id="ale-11-5-tbw">
+<h2>ALE 11.5: TBW<a class="headerlink" href="#ale-11-5-tbw" title="Link to this heading">#</a></h2>
+<p>[Placeholder for a new problem.]</p>
+</section>
+<section id="ale-11-6-an-informed-search">
+<h2>ALE 11.6: An informed search<a class="headerlink" href="#ale-11-6-an-informed-search" title="Link to this heading">#</a></h2>
+<p>The depth-first and breadth-first approaches presented in Chapter 11 work for any goal-directed search problem. Because they are agnostic to the specifics of your problem, they are called <em>uninformed</em> searches. It’s possible to build an <em>informed</em> search, as mentioned briefly in the chapter’s last section, by incorporating problem-specific information into the search algorithm.</p>
+<p>This exercise introduces you to a popular informed search, called <em>A* search</em>, and the use of <em>heuristic functions</em>. A heuristic function knows something about the particular problem you’re tackling, and thus the crafting of a heuristic makes your script better for certain goal-directed search problems and not useful for others.</p>
+<p>The purpose of a heuristic is to help your algorithm choose among the nodes in your frontier list, and if it is good heuristic, it will suggest nodes that will help the algorithm move more quickly to the goal.</p>
+<blockquote>
+<div><p>Example: When computing a set of driving directions, you might
+want your search algorithm to give priority to nodes on the frontier list that have the smallest, as-the-crow-flies distance between the current point and the goal.</p>
+</div></blockquote>
+<p>This example describes a heuristic. It encourages the search algorithm to move in the direction of the goal, rather than in any random direction, which is often a reasonable thing to do. But this encouragement might not always produce the best driving directions (e.g., it might have you turn into a cul-de-sac).</p>
+<p>In effect, heuristics compute a simpler version of your problem. By simpler, I mean that we’ve eliminated some of the problem’s constraints. Computing the as-the-crow-flies distance removes the constraint that we have to drive on a road.</p>
+<p><strong>Step 1.</strong> A popular informed algorithm is the A* pathfinding algorithm, which was formally described by Peter Hart, Nils Nilsson, and Bertram Raphael of the Stanford Research Institute in 1968. Their goal was to build a robot that could find its own way in our world of obstacles and do so expending as little wasted movement as possible.</p>
+<p>To gain a general understanding of how A* pathfinding works in a driving directions context, please watch the first 6 minutes of <a class="reference external" href="https://www.youtube.com/watch?v=-L-WgKMFuhE">this 12-minute video by Sebastian Lague</a>. Pay particular attention to G, H, and F costs computed for each node. Notice that G is a known cost (i.e., it is exactly the minimal cost of moving from start to the current location) and H is a heuristic cost (i.e., it is the minimal cost of moving from the current location to the goal while paying no attention to the obstacles on the map—an as-the-crow-flies distance computation).</p>
+<p><strong>Step 2.</strong> The programming problem set that goes with this chapter has you find a connection between two actors by searching for a string of actors. The constraint on the string is that adjacent actors must have starred together in a movie. Our example heuristic for driving directions makes no sense for this new problem because physical distance has no meaning when we want to link actors through their movies.</p>
+<p>What facts about movies and actors might help you discover an appropriate heuristic? When considering which actor on the frontier to choose next, these facts should help move you in the “right direction” and make you feel like you’re eliminating those who are unlikely co-stars of your goal actor. Write down a few sentences describing this heuristic and why it might work well.</p>
+<p>You’ve begun designing heuristics!</p>
+</section>
+<section id="ale-11-7-classes-in-oo-programming">
+<h2>ALE 11.7: Classes in OO programming<a class="headerlink" href="#ale-11-7-classes-in-oo-programming" title="Link to this heading">#</a></h2>
+<p>Object-oriented (OO) programming is complicated because it is meant to be flexible enough to create data structures that reflect the complexity of the world around us.</p>
+<p><strong>Step 1.</strong> I want you to read an online tutorial that doesn’t necessarily use OO programming to solve a particular problem (as we repeatedly do in this book) but instead focuses on the syntax for building a class. My hope is that the problem-solving foundation provided in Chapter 11 gives you a context in which to appreciate the simple, syntax-driven examples in tradtional OO tutorials.</p>
+<p>There are many good tutorials out there. It doesn’t matter which you read, but I recommend <a class="reference external" href="https://realpython.com/python3-object-oriented-programming/">“Object-Oriented Programming (OOP) in Python 3” on RealPython by David Amos (December 15, 2024)</a>.</p>
+<p>Feel free to skim and then dig in where you find something interesting. My goal in this reading isn’t to make you an expert in OO programming but to increase your comfort with it and its terminology.</p>
+<p><strong>Step 2.</strong> David Amos’s tutorial defines a class with which we can create objects of type <code class="docutils literal notranslate"><span class="pre">Dog</span></code>. I’ve copied his <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Dog</span></code> below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">### dog.py from David Amos&#39;s RealPython tutorial</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="linenos"> 3</span>    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;Canis familiaris&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old&quot;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sound</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> says </span><span class="si">{</span><span class="n">sound</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Using this class definition, David Amos defines several <em>child</em> classes, which derive from the parent class <code class="docutils literal notranslate"><span class="pre">Dog</span></code>. I, of course, added my own (i.e., <code class="docutils literal notranslate"><span class="pre">YellowLab</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">15</span><span class="c1">### also in David Amos&#39;s RealPython tutorial</span>
+<span class="linenos">16</span><span class="k">class</span> <span class="nc">JackRussellTerrier</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">pass</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">class</span> <span class="nc">Dachshund</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">20</span>    <span class="k">pass</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">class</span> <span class="nc">Bulldog</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">23</span>    <span class="k">pass</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># Mike&#39;s addition</span>
+<span class="linenos">26</span><span class="k">class</span> <span class="nc">YellowLab</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+<span class="linenos">27</span>    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>What will be printed if you define the classes above and then run the following statements?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">29</span><span class="n">cosmo</span> <span class="o">=</span> <span class="n">YellowLab</span><span class="p">(</span><span class="s2">&quot;Cosmo&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">cosmo</span><span class="p">):</span>
+<span class="linenos">32</span>    <span class="k">if</span> <span class="n">attribute</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+<span class="linenos">33</span>        <span class="nb">print</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should now have a better idea of what it means when a child class inherits attributes and methods of its parent class.</p>
+</section>
+<section id="ale-11-8-the-monty-hall-problem">
+<h2>ALE 11.8: The Monty Hall problem<a class="headerlink" href="#ale-11-8-the-monty-hall-problem" title="Link to this heading">#</a></h2>
+<p>This classic brain teaser is often used to illustrate the vexing nature of conditional probabilities and the power of Bayes’s theorem. Here’s <a class="reference external" href="https://web.archive.org/web/20130121183432/http://marilynvossavant.com/game-show-problem/">the problem as asked by Craig F. Whitaker to Marilyn vos Savant through a letter originally published in a 1990 issue of PARADE magazine</a>:</p>
+<blockquote>
+<div><p>Suppose you’re on a game show, and you’re given the choice of three doors. Behind one door is a car, behind the others, goats. You pick a door, say #1, and the host, who knows what’s behind the doors, opens another door, say #3, which has a goat. He says to you, “Do you want to pick door #2?” Is it to your advantage to switch your choice of doors?</p>
+</div></blockquote>
+<p><strong>Step 1.</strong> Take a moment and decide whether you’d stay with door #1 or switch to door #2. Sketch out the logic of your decision.</p>
+<p><strong>Step 2.</strong> My first reaction, like many people’s, is to focus on the two remaining doors and the fact that behind one of them is the car. Two doors, one car and one goat, 50-50 chance to pick the door hiding the car, right? I might as well stay with my original pick: door #1.</p>
+<p>Unfortunately, that’s the probabilistically poor choice. As we’ll understand through the next two steps, we should change our choice as the other unopened door will hide the car twice as often. Step 3 will get you to focus on the important part of the problem, and then in Step 4, you’ll write a simulation that estimates the probabilities.</p>
+<p><strong>Step 3.</strong> I found it surprisingly hard to write this simulation. It’s not hard to get it to generate thousands of trials of this problem, which is code I’ll give you. What’s hard is understanding what you should do with each of the randomly generated trials, and so first, I’ll attempt to cement in your mind what matters in this problem. In particular, it isn’t what I focused on as I described my initial reaction in Step 2. What you should focus on is the work the host does, which is lightly touched in the original problem statement.</p>
+<p>Consider this restatement of the problem:</p>
+<blockquote>
+<div><p>Suppose you’re on a game show, and Monty Hall, the host, gives you the choice of three doors. He tells you that behind one door is a car, behind the others, goats. The car and the goats have been randomly placed behind these doors. You (again) pick door #1.</p>
+<p>Hall clears his throat and says, “Excuse me while I peek behind door #3. If there’s a goat there, I’ll show it to you. But if the car is there, I’ll show you what’s behind door #2, which I’ll know must be a goat if the car is behind door #3. By following this simple algorithm and gaining a bit of insider information, I’ll always show you a goat, right?” After thinking about it, you nod.</p>
+<p>With your attention now squarely on what Hall is going to do, he grabs your shoulder, looks you in the eye, and asks, “What was the probability of a car being behind door #1 when you chose one of three doors? Will the work I do to find a goat to show you change the probability of the car being behind door #1?” You pause and think, and then you shake your head no.</p>
+<p>Hall turns and opens door #3, which has a goat. He says to you, “Do you want to pick door #2?”</p>
+</div></blockquote>
+<p><strong>Step 4.</strong> The restatement in the prior step provides you with what you need to know to write a script that simulates many trials of the Monty Hall problem. In <code class="docutils literal notranslate"><span class="pre">ale08.py</span></code>, I’ve started writing the script for you. You need to replace line 28 with your code that performs Monty Hall’s algorithm and updates the variable <code class="docutils literal notranslate"><span class="pre">wins</span></code>. When you’ve done it correctly, door #1 will win (i.e., hide the car) about one-third of the time.</p>
+<p>[Version 20250626]</p>
 </section>
 </section>
 
@@ -462,11 +614,14 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of dictionaries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-making-print-work">ALE 11.2: Making print work</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-more-power-to-the-constructor">ALE 11.3: More power to the constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-1-dictionary-of-dictionaries">ALE 11.1: Dictionary of Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-2-build-your-own">ALE 11.2: Build your own</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-3-is-it-better">ALE 11.3: Is it better?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-4-see-the-path">ALE 11.4: See the path</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-build-your-own-class">ALE 11.5: Build your own class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-5-tbw">ALE 11.5: TBW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-6-an-informed-search">ALE 11.6: An informed search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-7-classes-in-oo-programming">ALE 11.7: Classes in OO programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-11-8-the-monty-hall-problem">ALE 11.8: The Monty Hall problem</a></li>
 </ul>
   </nav></div>
 

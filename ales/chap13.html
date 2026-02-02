@@ -333,6 +333,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-13-1-a-promise-fulfilled">ALE 13.1: A promise fulfilled</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-13-2-grabbing-a-piece-of-a-path">ALE 13.2: Grabbing a piece of a path</a></li>
 </ul>
             </nav>
         </div>
@@ -359,7 +360,7 @@
 <span class="linenos">23</span>            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
 </pre></div>
 </div>
-<p><strong>Step 1.</strong> We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you should understand its operation, and if not, review our earlier work with <code class="docutils literal notranslate"><span class="pre">str.replace</span></code>.</p>
+<p><strong>Step 1.</strong> We begin by dispensing with line 21, which catches a case (the use of an en-dash) not handled by the RE expression in line 22. Make sure you understand its operation, and if not, review our earlier work with <code class="docutils literal notranslate"><span class="pre">str.replace</span></code>.</p>
 <p><strong>Step 2.</strong> Line 22, which continues on line 23, is where the interesting stuff happens. To understand this statement, first recognize that the outermost square brackets define a <em>Python list comprehension</em>, which is a shorthand for creating a new list from the values in an existing list. The “existing list” comes from a straightforward <code class="docutils literal notranslate"><span class="pre">str.split</span></code> of the input line, which removes whitespace but leaves “words” like <code class="docutils literal notranslate"><span class="pre">'best!&quot;'</span></code>, which you’ll see if you run the next code block.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;And Mrs. Smith said, &quot;I</span><span class="se">\&#39;</span><span class="s1">m the best!&quot;&#39;</span>
 <span class="linenos">2</span><span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
@@ -398,7 +399,19 @@
 <span class="linenos">2</span><span class="n">get_wordlist</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>[Version 20241204]</p>
+</section>
+<section id="ale-13-2-grabbing-a-piece-of-a-path">
+<h2>ALE 13.2: Grabbing a piece of a path<a class="headerlink" href="#ale-13-2-grabbing-a-piece-of-a-path" title="Link to this heading">#</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">get_fname</span></code> in Chapter 13 takes a full pathname like <code class="docutils literal notranslate"><span class="pre">/home/runner/chap13/test.py</span></code> and returns just the filename at the end of it (i.e., <code class="docutils literal notranslate"><span class="pre">test.py</span></code>). It does its work using the regular expression <code class="docutils literal notranslate"><span class="pre">\w+\.py$</span></code>.</p>
+<p>We can break down this regular expression and understand that it searches for a match that is one or more “word” characters (<code class="docutils literal notranslate"><span class="pre">\w+</span></code>) followed by a literal period (<code class="docutils literal notranslate"><span class="pre">\.</span></code>) and then the characters <code class="docutils literal notranslate"><span class="pre">py</span></code>. In other words, it finds things in a full pathname that look like filenames for Python scripts. However, the regular expression ends with a dollar sign (<code class="docutils literal notranslate"><span class="pre">$</span></code>), which means that the pattern it matches must occur at the end of the full pathname. Any matches of <code class="docutils literal notranslate"><span class="pre">\w+\.py</span></code> not occuring at the end of the pathname are ignored (i.e., they are not matches).</p>
+<p><strong>Step 1.</strong> Look at the code in <code class="docutils literal notranslate"><span class="pre">ale02.py</span></code>. The <code class="docutils literal notranslate"><span class="pre">main</span></code> function defines a list of full pathname strings, and then it runs three tests on the strings in this list. The first test is the same regular expression used in <code class="docutils literal notranslate"><span class="pre">get_fname</span></code>; it matches a Python-script-like name if one occurs at the end of the full pathname. The actual application of the regular expression and the printing of the result is done in the function <code class="docutils literal notranslate"><span class="pre">print_part</span></code>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">ale02.py</span></code> and make sure you understand when a full pathname produces a filename and when it fails to do so. You’re just looking at the output between <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">TEST</span> <span class="pre">1</span> <span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">TEST</span> <span class="pre">2</span> <span class="pre">##</span></code> right now.</p>
+<p><strong>Step 2.</strong> The second test changes the regular expression. This expression says that it wants <code class="docutils literal notranslate"><span class="pre">print_part</span></code> to also print the folder containing the Python-script-like name if that folder is called <code class="docutils literal notranslate"><span class="pre">chap13</span></code>.</p>
+<p>Again, run <code class="docutils literal notranslate"><span class="pre">ale02.py</span></code> and make sure you understand what’s printed between <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">TEST</span> <span class="pre">2</span> <span class="pre">##</span></code> and <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">TEST</span> <span class="pre">3</span> <span class="pre">##</span></code>.</p>
+<p><strong>Step 3.</strong> Can you define <code class="docutils literal notranslate"><span class="pre">re3</span></code> so that it matches not a specific folder name, but any simple folder name? The first five strings and the seventh in <code class="docutils literal notranslate"><span class="pre">fullpaths</span></code> are what I’d call simple folder names; they use only characters in the shorthand <code class="docutils literal notranslate"><span class="pre">\w</span></code>. Remember, we still want to match only filenames that look like Python scripts!</p>
+<p>Your regular expression should produce a match for the full pathname strings at indices 0-2 and 5-6 in <code class="docutils literal notranslate"><span class="pre">fullpaths</span></code>, but the match produced by <code class="docutils literal notranslate"><span class="pre">fullpaths[5]</span></code> will be <code class="docutils literal notranslate"><span class="pre">py/test.py</span></code> and not <code class="docutils literal notranslate"><span class="pre">test.py/test.py</span></code>.</p>
+<p><strong>Step 4. (EXTRA CREDIT)</strong> Can you define <code class="docutils literal notranslate"><span class="pre">re3</span></code> so that it produces <code class="docutils literal notranslate"><span class="pre">test.py/test.py</span></code> for <code class="docutils literal notranslate"><span class="pre">fullpath[5]</span></code> while not changing the printed output for the first three and the seventh <code class="docutils literal notranslate"><span class="pre">fullpaths</span></code> strings?</p>
+<p>[Version 20250408]</p>
 </section>
 </section>
 
@@ -468,6 +481,7 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-13-1-a-promise-fulfilled">ALE 13.1: A promise fulfilled</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-13-2-grabbing-a-piece-of-a-path">ALE 13.2: Grabbing a piece of a path</a></li>
 </ul>
   </nav></div>
 

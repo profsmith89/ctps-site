@@ -172,4 +172,72 @@ In 8.2, you created a script that fixed photobombs in our pictures. Now it is yo
 
 **Step 2.** Run your images through the script you built in 8.2. Show your friends and family!
 
-\[Version 20241204\]
+## ALE 8.4: Coarsen a street number
+
+You may recall an ALE from Chapter 3 that had you use string processing to coarsen the house number in a street address. In this exercise, you'll strengthen your understanding of bitwise operators to accomplish a similar outcome.
+
+The task is to take a street address like "119 Reed St" and mask out parts of its house number. In the exercise from Chapter 3, we turned this street address into "1XX Reed St" and this time we'll make it "000 Reed St". In other words, you'll turn every numerical digit in a street address into the digit 0.
+
+**Step 1.** The script `ale04.py` in the `chap08` distribution contains a lot of the code you need to complete this task and run some checks. I've copied this starter code below.
+
+```{code-block} python
+---
+lineno-start: 1
+---
+### chap08/ale04.py
+
+# A list of messy, complete street addresses and the expected,
+# coarsened equivalents. Your task is to complete the function
+# `coarsen` so that it produces the second string from the
+# first using only bitwise operations, and the built-in
+# functions `ord` and `chr`.
+addrs = [
+    ("119 Reed St", "000 Reed St"),
+    ("253 Rindge St", "000 Rindge St"),
+    ("6 Emmons Pl", "0 Emmons Pl"),
+    ("   113 Walker St", "000 Walker St"),
+    ("109 Walker St      ", "000 Walker St"),
+    (" 30 Clay St  ", "00 Clay St"),
+    ("\t  40 Montgomery St", "00 Montgomery St"),
+]
+
+def coarsen(full_addr):
+    '''Given a messy full street address return a clean coarsened one'''
+    coarsened_addr = ''
+    for c in full_addr.strip():
+        if c.isnumeric():
+            pass
+        else:
+            coarsened_addr += c
+
+    return coarsened_addr
+
+def main():
+    "Driver that tests your function."
+
+    for full_addr, coarsened_addr in addrs:
+        r = coarsen(full_addr)
+        if r == coarsened_addr:
+            print(f'PASSED on test: "{full_addr}"')
+        else:
+            print(f'FAILED on "{full_addr}", returned:\n\t"{r}"')
+
+if __name__ == "__main__":
+    main()
+``` 
+
+Much of the `coarsen` function is written for you. As you can see, it processes each character `c` in the input `full_addr` and either leaves the character untouched or recognizes it as a number (via the `isnumeric` method on Python strings) and changes it before adding it to the new `coarsened_addr` string. Well, it should change the numeric characters, but the body of the if-statement (line 23) currently does nothing. Replace the `pass` statement with your solution.
+
+Your solution should use only:
+
+*   bitwise operators;
+*   the `ord` function that turns a string containing a single character into its numerical encoding. For example, `ord('a')` returns `97`, [as the Python documentation states](https://docs.python.org/3/library/functions.html#ord); and
+*   the `chr` function that goes in the opposite direction of `ord`: given an integer, it returns a string with a single character. That character's encoding is the given integer.
+
+HINT: Before you attempt to do any design, use `ord` to see what the encodings are for the numerical characters `'0'` through `'9'`. You might then look at the binary encodings of these encodings using `bin`. Finally, figure out how to use a bitmask and a bitwise operator to change just the bits in the encoding from the character it is to the one you want.
+
+**Step 2.** With the solution to Step 1 in hand, you can change the masking to use any number you'd like. Perhaps you like `7` better than `0`, and you want "1XX Reed St" to turn into "777 Reed St". See if you can adjust your previous solution to bitwise-or in your favorite number.
+
+HINT: You can use all your previous solution and just include this one extra bitwise operation. You don't even have to turn your favorite number into a character encoding because of the way that the numerical digits are encoded!
+
+\[Version 20250225\]

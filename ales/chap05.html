@@ -336,6 +336,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-2-so-many-ways-to-pick">ALE 5.2: So many ways to pick</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-3-catching-exceptions">ALE 5.3: Catching exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-4-adding-metadata-to-your-messages">ALE 5.4: Adding metadata to your messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-5-abstraction-and-design">ALE 5.5: Abstraction and design</a></li>
 </ul>
             </nav>
         </div>
@@ -522,8 +523,38 @@
 </pre></div>
 </div>
 <p>Notice that I’ve named the different escape sequences with a descriptive name. To turn on the printing of text in red, you simply print the <code class="docutils literal notranslate"><span class="pre">red</span></code> escape sequence. To turn off printing text in red, you need to insert the escape sequence of a different color or use the return-to-default-color escape sequence, which I’ve named <code class="docutils literal notranslate"><span class="pre">default</span></code>. I’ve printed the capitalized name of the game in our three different colors as an example.</p>
-<p><strong>Step 3.</strong> Start <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> by making a copy of the <code class="docutils literal notranslate"><span class="pre">guess-server.py</span></code> script developed in the chapter. Adapt <code class="docutils literal notranslate"><span class="pre">ale04-client.py</span></code> (above) and <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> so that they play this enhanced guess-the-number game.</p>
-<p>[Version 20241204]</p>
+<p><strong>Step 3.</strong> Adapt <code class="docutils literal notranslate"><span class="pre">ale04-client.py</span></code> and <code class="docutils literal notranslate"><span class="pre">ale04-server.py</span></code> so that they play the enhanced guess-the-number game.</p>
+</section>
+<section id="ale-5-5-abstraction-and-design">
+<h2>ALE 5.5: Abstraction and design<a class="headerlink" href="#ale-5-5-abstraction-and-design" title="Link to this heading">#</a></h2>
+<p>You’ve grappled with the slippery topic of abstraction through the book’s first chapters and seen numerous examples of it. Abstraction hides the details necessary for the computer to perform our intended action, but which simultaneously distract us humans from a computation’s big picture. In general, we humans find it easier to think about the intended action in the abstract without all the details.</p>
+<p>However, even after you’ve decided where to place an abstraction barrier (i.e., the barrier that hides a solution’s details), you’ll be confronted with the choice of exactly how to design the abstraction. Recall Chapter 3’s example of a procedural abstraction for exponentiation where we asked if we should create separate <code class="docutils literal notranslate"><span class="pre">square</span></code> and <code class="docutils literal notranslate"><span class="pre">cube</span></code> functions, each taking a single input parameter, or a single <code class="docutils literal notranslate"><span class="pre">power</span></code> function taking two parameters. Or should we, as the Python standard library provides, create a single <code class="docutils literal notranslate"><span class="pre">power</span></code> function that takes at least two and sometimes three parameters?</p>
+<p>In this exercise, you’ll practice thinking through these sorts of choices in the context of a completely different problem. This exercise asks you to do design, not implementation. You’ll think about the problem, decide on some primitives (which will define your abstraction barrier), and what the interface to those primitives might look like (i.e., what the <code class="docutils literal notranslate"><span class="pre">def</span></code> line of a function for your primitive might look like).</p>
+<p><strong>A new problem.</strong> Consider the passing of messages between two different programs, one written by you and the other written by a friend. In particular, your program needs to send a message (i.e., a line of text) to your friend’s program. Don’t worry about how your friend’s program will receive this message; just think about the sending of this message.</p>
+<p>Sounds simple, right? You’ve probably thought, “I’ll just define a function called <code class="docutils literal notranslate"><span class="pre">send</span></code>.” Great, here’s the beginning of that function’s definition:</p>
+<p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">send(...</span></code></p>
+<p><strong>Step 1.</strong> The function is named but what input parameters do you want to include? What capabilities do you want this new function to support?</p>
+<p>To answer these questions, think about sending a physical letter (yes, we know, old school). There are actually several ways to send a letter at a U.S. Post Office:</p>
+<ol class="arabic simple">
+<li><p>The easiest approach is to prepare your letter, drop it in a mailbox, and forget about it.</p></li>
+<li><p>Alternatively, you can buy insurance against loss of or damage to your letter in transit, which pays you cash in the event of such an occurrence.</p></li>
+<li><p>As a separate consideration, you may care about how fast your letter travels to its destination, and in this case, you might also mark the letter as priority mail.</p></li>
+<li><p>Finally, you may wish to have proof that you mailed the letter when you said you did or that it was successfully delivered.</p></li>
+<li><p>Or you might want some combination of items 2-4.</p></li>
+</ol>
+<p>Decide which of these types of features you want to support in your <code class="docutils literal notranslate"><span class="pre">send</span></code> function.</p>
+<p><strong>Step 2.</strong> Now that you know which features (if any) you want to support, you next need to think about how a user of your send functionality will express which of these features are important at each <code class="docutils literal notranslate"><span class="pre">send</span></code> call.</p>
+<ol class="arabic simple">
+<li><p>Do you want a single function that requires a user to specify all these options, even if some are given a default value (and if so, what is each default value)?</p></li>
+<li><p>Or do you want a couple of variants of our abstract send? For example, you might create a simple <code class="docutils literal notranslate"><span class="pre">send</span></code> function that operates like dropping your letter in the mailbox and forgetting about it (possibly with or without insurance), and another <code class="docutils literal notranslate"><span class="pre">send_certified</span></code> function that provides you with a return value, which represents the proof you desire.</p></li>
+</ol>
+<p>There is no right answer here. With a friend, talk through these two design choices and answer the following questions:</p>
+<ul class="simple">
+<li><p>Within what contexts might you might prefer one design over the other?</p></li>
+<li><p>What are you making easy in each approach? What are you making more difficult?</p></li>
+</ul>
+<p>As you discuss these questions and your personal choices, listen especially to the places where you and your friend disagree. Understanding and appreciating these differences is how you will grow as a designer.</p>
+<p>[Version 20250211]</p>
 </section>
 </section>
 
@@ -596,6 +627,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-2-so-many-ways-to-pick">ALE 5.2: So many ways to pick</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-3-catching-exceptions">ALE 5.3: Catching exceptions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-4-adding-metadata-to-your-messages">ALE 5.4: Adding metadata to your messages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ale-5-5-abstraction-and-design">ALE 5.5: Abstraction and design</a></li>
 </ul>
   </nav></div>
 
